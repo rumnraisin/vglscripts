@@ -246,7 +246,7 @@ var TeamLists = {
 		{id:"ssbg",	color:"#E4EDED",icon:"/w/images/thumb/6/62/Ssbg_icon.png/38px-Ssbg_icon.png"},
 		{id:"tf2g",	color:"#BD3B3B",icon:"/w/images/thumb/2/24/Tf2g_icon.png/25px-Tf2g_icon.png"},
 		{id:"tnm",	color:"#480008",icon:"/w/images/thumb/e/e7/Tnm_icon.png/38px-Tnm_icon.png"},
-		{id:"trg",	color:"#228B22",icon:"/w/images/thumb/7/7e/Trg_icon.png/38px-Trg_icon.png",
+		{id:"trg",	color:"#228B22",icon:"/w/images/thumb/7/7e/Trg_icon.png/38px-Trg_icon.png"},
 		{id:"twg",	color:"#990000",icon:"/w/images/thumb/b/b2/Twg_icon.png/38px-Twg_icon.png"},
 		{id:"vitagen",	color:"#000000",icon:"/w/images/thumb/4/47/Vitagen_icon.png/25px-Vitagen_icon.png"},
 		{id:"vn",	color:"#FFFFFF",icon:"/w/images/thumb/f/fb/Vn_icon.png/25px-Vn_icon.png"},
