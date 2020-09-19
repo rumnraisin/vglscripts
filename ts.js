@@ -253,7 +253,7 @@ var TeamLists = {
 		{id:"vrg",	color:"#34c7cf",icon:"/w/images/thumb/d/d6/Vrg_icon.png/25px-Vrg_icon.png"},
 		{id:"wtg",	color:"#DE0000",icon:"/w/images/thumb/4/4f/Wtg_icon.png/25px-Wtg_icon.png"},
 		{id:"きらら",	color:"#6FA0FF",icon:"/w/images/thumb/9/9a/%E3%81%8D%E3%82%89%E3%82%89_icon.png/25px-%E3%81%8D%E3%82%89%E3%82%89_icon.png"},
-		{id:"acg",	color:"#206000",icon:"/w/images/thumb/3/31/Acg_icon.png/25px-Acg_icon.pn"},
+		{id:"acg",	color:"#206000",icon:"/w/images/thumb/3/31/Acg_icon.png/25px-Acg_icon.png"},
 		{id:"assg",	color:"#C62B29",icon:"/w/images/5/55/Assg_icon.png"},
 		{id:"xcg",	color:"#E35496",icon:"/w/images/thumb/4/40/Xcg_icon.png/25px-Xcg_icon.png"},
 	]
