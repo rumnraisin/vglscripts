@@ -256,7 +256,7 @@ var TeamLists = {
 		{id:"acg",	color:"#206000",icon:"/w/images/thumb/3/31/Acg_icon.png/25px-Acg_icon.pn"},
 		{id:"assg",	color:"#C62B29",icon:"/w/images/5/55/Assg_icon.png"},
 		{id:"xcg",	color:"#E35496",icon:"/w/images/thumb/4/40/Xcg_icon.png/25px-Xcg_icon.png"},
-	],
+	]
 
 	/* when somebody makes an invitational and the teams are all in a neat multi-column list on the page,
 	   inspect element > right-click > store as global variable > then in the console (edit as needed):
