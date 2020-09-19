@@ -17,7 +17,7 @@ $( document ).ready(function() {
 				$(this).parent().find('.dropdown-menu').detach().appendTo('#welcome');
 				$(this).parent().remove();
 			} else if ($(this).text() == 'Layout'){ 
-				$(this).html($(this).html().replace('Layout','ï¸<b>âš™</b>'));
+				$(this).html($(this).html().replace('Layout','<b>⚙</b>'));
 				$(this).parent().attr('ID','settingsMenu');
 				$('li a').each(function(){
 					if($(this).text() == 'Options'){
