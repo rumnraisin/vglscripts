@@ -1,0 +1,240 @@
+.username::before{          background:url('https://implyingrigged.info/w/images/d/df/Vglg_icon.png');}
+
+/* /x/'s black names are impossible to see, so give them a ghostly glow */
+.teamx{ text-shadow: 0 0 4px white; }
+.teamx::before{text-shadow: none;}
+
+.username::before{
+	content:"AA";
+	background-size:16px !important;
+background-repeat:no-repeat !important;
+color:rgba(0,0,0,0);
+}
+
+
+#drinkcount, #modflair, #footer, #videowrap-header, #userlist, .server-whisper{
+	display:none;
+}
+
+.profile-box{
+left:0 !important;
+}
+
+/*Images and Text*/
+#messagebuffer img,
+#messagebuffer video{
+	max-width:200px;
+	max-height:200px;
+}
+.channel-emote{
+	Max-width:25px;
+	Max-height:25px!important;
+}
+.vidchat{
+position:absolute;
+    color:white;
+    font-size: 20px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    width: 2000px !important;
+    top: 0px;
+    right: 0px;
+}
+.vidchat img{
+	max-height:100px;
+	max-width:100px;
+	
+}
+.username{
+	color:#117743;
+}
+select{
+	color:black
+}
+.anon::after{
+	content:"Anonymous: ";
+	font-size:14px;
+}
+.anon{
+	font-size:0px;
+}
+option{
+	color:black;
+	background:white;
+}
+.imgay {
+    color: hsl(206,87%,49%)!important;
+    text-shadow: 2px 2px 2px #000;
+}
+.imgay::before {
+    content: "&";
+    color: grey;
+}
+
+
+/*Other bullshit*/
+body{    background: linear-gradient(#272b30,#1c293a) fixed;}
+#pollwrap{right:0;width:calc(100% - 500px);min-width:500px;position:absolute;top:0;z-index:10;background:rgba(28,41,58,0.75);}
+#pollwrap h3{display:inline;margin:0;}
+#pollwrap .option{display:inline;margin-left:10px;}
+#pollwrap .well{padding:0;margin:5px;border:0;background:none;}
+#nav-collapsible{background-color:rgba(40,42,46,0.9);height:25px!important;}
+.form-control, #login{height:auto;padding:0 6px;}
+#loginform{margin-top:0;margin-bottom:0;}
+#videowrap{max-height:100%;width:calc(100% - 34rem);padding:0;margin:0;}
+#chatwrap{float:right;width:34rem;height:calc(100% - 110px);padding:0;margin:0;}
+#mainpage{height:100%;}
+#mainpage{padding-top:25px;}
+#wrap{padding:0;}
+#chatline{padding:6px;}
+.navbar-brand{height:auto;}
+.drink{border:none;margin:0;padding:0;}
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a, #logoutform, #logout{color:#81A2BE;text-shadow:none;padding:0 10px;margin:0;}
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-nav>li>a:hover{color:#d00;background:none;cursor:pointer;}
+.navbar-header{height:25px;}
+.navbar{min-height:0;box-shadow: -5px 1px 10px rgba(0, 0, 0, 0.20);border:none;}
+.profile-box{left:0 !important;}
+
+
+/*>Phoneposters*/
+@media only screen and (max-width: 600px) {
+	#videowrap{
+		width:100%;
+		position:static;
+		display:inline-block;
+	}
+	#chatwrap{
+		width:100%;
+		position:static;
+		display:inline-block;
+		float:left;
+	}
+	#nicobtn,#btn_anon {
+        Display:none
+    }
+	#nav-collapsible{height:auto!important;}
+}
+
+/*Scoop's Cytube Overhaul Shit*/
+#main { margin: 0 -15px 0 -15px; }
+#mainpage { padding-top: 25px !important; }
+#messagebuffer, #userlist { height: calc(100vh - 100px) !important; }
+body { overflow-y:scroll; }
+#playlistrow #pollwrap { min-width: auto; }
+@media only screen and (min-width: 600px) {
+    .fixedChat #chatwrap { position: fixed; right: 0; top: 25px; z-index:1000; }
+    .fixedChat #announcements>div { width:calc(100% - 34rem); }
+}
+
+#chatline2 { 
+    display: none;
+    resize: none; 
+    padding: 6px;/*already applied to #chatline*/ 
+    text-indent: 22px;
+}
+#chatline { padding: 6px 28px 6px 26px !important; }
+#selectteam { position: absolute; padding: 6px 4px; }
+#selectteam>span { 
+    width: 21px;
+    text-align: center;
+}
+#selectteam>span:hover>img,
+#selectteam>span.open>img {
+    background-color: #3399ff;
+}
+#selectteam img {
+    width: 21px;
+    padding: 1px;
+}
+#selectteam ul {
+    background-color: #666;
+    border: 1px solid #7B9DD4;
+    padding: 0;
+    color: #EEE;
+    min-width: auto;
+    width: max-content;
+    overflow-y: auto;
+    max-height: 400px;
+    margin-bottom: -1px;
+}
+#selectteam li {
+    display: block;
+    user-select: none;
+}
+#selectteam li:focus, #selectteam:not(:focus-within) li:hover {
+    background-color: #1E90FF;
+    color: white;
+    outline: 0;
+}
+#selectteam li>p {
+    padding: 0 3px 0 3px;
+    vertical-align: bottom;
+    display: inline;
+}
+#selectteam.grid li>p {
+    display: none;
+}
+#selectteam.grid li {
+    position: relative;
+    display: inline-block;
+    min-width: 21px;
+    padding: 1px;
+}
+#selectteam.grid ul {
+    max-width: 260px;
+    text-align: center;
+    padding: 1px 1px;
+    overflow-y: visible;
+}
+#selectteam.grid img:hover~p {
+    position: absolute;
+    display: block;
+    float: left;
+    left: 16px;
+    bottom: 8px;
+    color: #000;
+    background-color: #EEE;
+    border: #BBB solid 1px;
+    pointer-events: none;
+    line-height: 17px;
+    z-index: 100;
+}
+#settingsMenu button { display: block; background: none; border: 0; padding: 3px 20px; clear: both; }
+#settingsMenu button:hover { background-color: rgba(0,2,4,0.4); }
+#settingsMenu button.active span:nth-of-type(2n+1),
+#settingsMenu button:not(.active) span:nth-of-type(2n) {
+    display: none;
+}
+#messagebuffer.bigEmotes .channel-emote{
+    Max-height:50px!important;
+}
+#emotebtndiv { position: absolute; width: 100%; pointer-events: none; padding: 6px 3px; }
+#emotebtndiv button { position: relative; float: right; background-color: #444; padding: 1px 3px; pointer-events: auto;font-weight: bold; color: #DDD; }
+#emotebtndiv button:hover { color: #FFF; background-color: #000B; }
+#pollhistory {
+    width: 100%;
+    background: rgba(50,54,57,.80);
+    position: relative;
+    min-height: 0;
+}
+#pollhistory .well {
+    padding: 0;
+    margin: 5px;
+    border: 0;
+    background: none;
+}
+#pollhistory h3 {
+    display: inline;
+    margin: 0;
+}
+#pollhistory .option {
+    display: inline;
+    margin-left: 10px;
+}
+#pollsTab button.close {
+    display: none;
+}
+#pollwrap .option, #pollhistory .option { vertical-align: top; }
+#pollwrap .option button, #pollhistory .option button { margin-right: 7px; padding: 3px 8px; }
+#verticalPollsCheckbox:checked~div .option { display: block; margin: 3px 0 0 0; }
+body { background-attachment: fixed; }
+#messagebuffer, html { scrollbar-color: #444 #222; }
