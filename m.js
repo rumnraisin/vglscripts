@@ -1,5 +1,5 @@
 $('<link id="chanfavicon" href="https://implyingrigged.info/w/images/d/df/Vglg_icon.png" type="image/x-icon" rel="shortcut icon" />').appendTo("head");
-$('.navbar-brand').attr('href','https://implyingrigged.info/wiki/Main_Page').text(' /vg/ League').css('padding', '0 10px 0 0').prepend('<img src="https://implyingrigged.info/w/images/d/df/Vglg_icon.png" style="display: inline;" height="20"/>');
+$('.navbar-brand').attr('href','https://implyingrigged.info/wiki//vg/_League').text(' /vg/ League').css('padding', '0 10px 0 0').prepend('<img src="https://implyingrigged.info/w/images/d/df/Vglg_icon.png" style="display: inline;" height="20"/>');
 $('head').append('<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/rumnraisin/vglscripts/nnd.js">');
 $('head').append('<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/rumnraisin/vglscripts/ts.js">');
 //$('head').append('<script type="text/javascript" src="https://implyingrigged.info/cytube/anon.js">');
