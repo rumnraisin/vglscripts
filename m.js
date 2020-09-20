@@ -71,13 +71,13 @@ $( document ).ready(function() {
 			}
 			$('#matchSchedule').append('<li id="match' + i + '"></li>');
 		}
-		$('#matchSchedule').append("<li><a style='background:grey' href='https://implyingrigged.info/wiki/2019_4chan_Winter_Cup'>Cup Page</a></li>");
+		$('#matchSchedule').append("<li><a style='background:grey' href='https://implyingrigged.info/wiki//vg/_League_15_Friendlies'>Cup Page</a></li>");
 		//Other shit
 		$('#nav-collapsible ul:first-child').append("<li class='dropdown'><a target='_blank' href='https://implyingrigged.info/gametips/'>Submit a Gametip</a></li>");
-		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.youtube.com/c/The4chanCup?sub_confirmation=1" target="_blank">Get notifications when LIV</a></li>');
-		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.youtube.com/c/The4chanCup" target="_blank"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico"/></a></li>');
+		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.youtube.com/channel/UCMZYZp8eULxC5v097fswHcA?sub_confirmation=1" target="_blank">Get notifications when LIV</a></li>');
+		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.youtube.com/channel/UCMZYZp8eULxC5v097fswHcA" target="_blank"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico"/></a></li>');
 		$('#nav-collapsible ul:first-child').append('<li><a href="https://boards.4channel.org/vg/catalog#s=4ccg" target="_blank"><img src="https://s.4cdn.org/image/favicon.ico"/></a></li>');
-		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.twitch.tv/fourchannelcup" target="_blank"><img src="https://assets.help.twitch.tv/favicon.ico" width=16 /></a></li>');
+		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.twitch.tv/vglvods" target="_blank"><img src="https://assets.help.twitch.tv/favicon.ico" width=16 /></a></li>');
 	}
 	
 	/* Tabs */ {
