@@ -2,7 +2,7 @@ var TeamLists = {};
 var AllTeams = {};
 var CurrentTeamList = null; 
 var CurrentTeamListName;
-var defaultIconSrc = "https://cdn.discordapp.com/attachments/206133754387759107/756901326469857356/clover_logo_2.png";
+var defaultIconSrc = "https://implyingrigged.info/w/images/d/df/Vglg_icon.png";
 var scrollingToTeam = false;
 
 function setTeamList(teamList){
