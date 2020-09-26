@@ -255,7 +255,7 @@ var TeamLists = {
 		{id:"きらら",	color:"#ff678f",icon:"/w/images/thumb/9/9a/%E3%81%8D%E3%82%89%E3%82%89_icon.png/25px-%E3%81%8D%E3%82%89%E3%82%89_icon.png"},
 		{id:"acg",	color:"#206000",icon:"/w/images/thumb/3/31/Acg_icon.png/25px-Acg_icon.png"},
 		{id:"assg",	color:"#C62B29",icon:"/w/images/5/55/Assg_icon.png"},
-		{id:"xcg",	color:"#E35496",icon:"/w/images/thumb/4/40/Xcg_icon.png/25px-Xcg_icon.png"},
+		{id:"xcg",	color:"#077887",icon:"/w/images/thumb/4/40/Xcg_icon.png/25px-Xcg_icon.png"},
 	],
 	"meme":[
 		{id:"a",	color:"#FF0099",icon:"/w/images/thumb/3/3a/A_icon.png/25px-A_icon.png"},
