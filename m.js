@@ -71,7 +71,7 @@ $( document ).ready(function() {
 			}
 			$('#matchSchedule').append('<li id="match' + i + '"></li>');
 		}
-		$('#matchSchedule').append("<li><a style='background:grey' href='https://implyingrigged.info/wiki//vg/_League_15_Friendlies'>Cup Page</a></li>");
+		$('#matchSchedule').append("<li><a style='background:grey' href='https://implyingrigged.info/wiki//vg/_League_15'>Cup Page</a></li>");
 		//Other shit
 		$('#nav-collapsible ul:first-child').append("<li class='dropdown'><a target='_blank' href='https://implyingrigged.info/vglgametips/'>Submit a Gametip</a></li>");
 		$('#btn_autoreply').click(function(){
