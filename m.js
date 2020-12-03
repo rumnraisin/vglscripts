@@ -163,7 +163,7 @@ $( document ).ready(function() {
 		//Calendar Tab
 		$('<div role="tabpanel" class="tab-pane" id="calendarTab"><iframe width="100%" height="600" frameborder="0" scrolling="no"></iframe></div>').appendTo(tabContent);
 		$('<li role="presentation"><a role="tab" data-toggle="tab" aria-expanded="false" href="#calendarTab">Calendar</a></li>').appendTo(tabList);
-		var baseCalendarUrl = '//calendar.google.com/calendar/embed?showTitle=0&showNav=1&showDate=1&showTabs=1&showCalendars=1&showTz=1&wkst=1&showPrint=0&hl=en&';
+		var baseCalendarUrl = '//calendar.google.com/calendar/embed?';
 		var calendars = getOrDefault(CHANNEL.name + '_CALENDARS', null);
 		if(!Array.isArray(calendars)) setOpt(CHANNEL.name + '_CALENDARS', calendars = [{ src:'cmjrl0iaci7in72n3rem95qaec%40group.calendar.google.com', color:'232952A3' } ]); //set the default calendar if not already
 		AddCalendar = function(src, color){ setOpt(CHANNEL.name + '_CALENDARS', getOrDefault(CHANNEL.name + '_CALENDARS', []).concat([{src:src,color:color}])); }
