@@ -1,6 +1,6 @@
 .username::before{          background:url('https://implyingrigged.info/w/images/d/df/Vglg_icon.png');}
 
-/* /x/'s black names are impossible to see, so give them a ghostly glow */
+/* ouline shit goes here */
 .teamakg{ text-shadow: 0 0 3px white; }
 .teamakg::before{text-shadow: none;}
 
