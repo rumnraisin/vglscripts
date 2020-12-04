@@ -4,7 +4,7 @@ $('head').append('<script type="text/javascript" src="https://cdn.jsdelivr.net/g
 $('head').append('<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/rumnraisin/vglscripts/ts.js">');
 //$('head').append('<script type="text/javascript" src="https://implyingrigged.info/cytube/anon.js">');
 $('head').append('<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/rumnraisin/vglscripts/em.js">');
-//keep track of all the users that ever enter chat
+//test
 $( document ).ready(function() {
 	/* Navbar */ { 
 		//Options/Account
