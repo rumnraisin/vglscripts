@@ -228,6 +228,7 @@ var TeamLists = {
 		{id:"gbfg",	color:"#4561BA",icon:"/w/images/thumb/4/4f/Gbfg_icon.png/25px-Gbfg_icon.png"},
 		{id:"gbpen",	color:"#E50050",icon:"/w/images/thumb/5/55/Gbpen_icon.png/38px-Gbpen_icon.png"},
 		{id:"gfg",	color:"#ffaa00",icon:"/w/images/thumb/1/12/Gfg_icon.png/38px-Gfg_icon.png"},
+		{id:"gig",	color:"#822b18",icon:"/w/images/thumb/a/ab/Gig_icon.png/25px-Gig_icon.png"},
 		{id:"hanny",	color:"#E11212",icon:"/w/images/thumb/8/80/Hanny_icon.png/25px-Hanny_icon.png"},
 		{id:"hgg2d",    color:"#5DADEC",icon:"/w/images/thumb/7/7a/Hgg2d_icon.png/38px-Hgg2d_icon.png"},
 		{id:"indie",	color:"#471f10",icon:"/w/images/thumb/9/93/Indie_icon.png/25px-Indie_icon.png"},
