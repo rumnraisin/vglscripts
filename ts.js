@@ -205,7 +205,7 @@ function InitTeam(team) {
 
 var TeamLists = {
 	"4cc":[
-		{id:"idolmaster",        color:"#F20972",icon:"/w/images/thumb/7/7a/%40_icon.png/38px-%40_icon.png"},
+		{id:"check",        color:"#F20972",icon:"/w/images/thumb/7/7a/%40_icon.png/38px-%40_icon.png"},
 		{id:"2hug",	color:"#7FAC75",icon:"/w/images/thumb/3/34/2hug_icon.png/25px-2hug_icon.png"},
 		{id:"acg",	color:"#206000",icon:"/w/images/thumb/3/31/Acg_icon.png/25px-Acg_icon.png"},
 		{id:"aceg",	color:"#CE5200",icon:"/w/images/thumb/e/e5/Aceg_icon.png/25px-Aceg_icon.png"},
