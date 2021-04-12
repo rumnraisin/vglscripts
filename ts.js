@@ -298,3 +298,4 @@ $('#messagebuffer div span').each(function(){
 		teamClass = '';
 	}
 });
+
