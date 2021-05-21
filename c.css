@@ -1,12 +1,5 @@
 .username::before{          background:url('https://implyingrigged.info/w/images/d/df/Vglg_icon.png');}
 
-/* ouline shit goes here */
-.teamakg{ text-shadow: 0 0 3px white; }
-.teamakg::before{text-shadow: none;}
-.teamdlg{ font-family: "Comic Sans MS", "Comic Sans", cursive; }
-.teamdlg{ text-shadow: 0 0 2px white; }
-.teamdlg::before{text-shadow: none;}
-
 .username::before{
 	content:"AA";
 	background-size:16px !important;
