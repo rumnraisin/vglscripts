@@ -5,7 +5,7 @@
 .teamakg::before{text-shadow: none;}
 .teamdlg{ font-family: "Comic Sans MS", "Comic Sans", cursive; }
 .teamdlg{ text-shadow: 0 0 2px white; }
-.teamakg::before{text-shadow: none;}
+.teamdlg::before{text-shadow: none;}
 
 .username::before{
 	content:"AA";
