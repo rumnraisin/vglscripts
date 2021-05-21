@@ -3,6 +3,7 @@
 /* ouline shit goes here */
 .teamakg{ text-shadow: 0 0 3px white; }
 .teamakg::before{text-shadow: none;}
+.teamakg{ font-family: "Comic Sans MS", "Comic Sans", cursive;; }
 
 .username::before{
 	content:"AA";
