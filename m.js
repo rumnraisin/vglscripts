@@ -90,7 +90,7 @@ $( document ).ready(function() {
 			}, 30000);
 		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.youtube.com/channel/UCMZYZp8eULxC5v097fswHcA?sub_confirmation=1" target="_blank">Get notifications when LIV</a></li>');
 		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.youtube.com/channel/UCMZYZp8eULxC5v097fswHcA" target="_blank"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico"/></a></li>');
-		$('#nav-collapsible ul:first-child').append('<li><a href="https://boards.4channel.org/vg/catalog#s=4ccg" target="_blank"><img src="https://s.4cdn.org/image/favicon.ico"/></a></li>');
+		$('#nav-collapsible ul:first-child').append('<li><a href="https://boards.4channel.org/vg/catalog#s=vglg" target="_blank"><img src="https://s.4cdn.org/image/favicon.ico"/></a></li>');
 		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.twitch.tv/vglvods" target="_blank"><img src="https://assets.help.twitch.tv/favicon.ico" width=16 /></a></li>');
 	}
 	
