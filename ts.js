@@ -207,7 +207,6 @@ var TeamLists = {
 	"4cc":[
 		{id:"idolmaster",        color:"#F20972",icon:"/w/images/thumb/7/7a/%40_icon.png/38px-%40_icon.png"},
 		{id:"2hug",	color:"#7FAC75",icon:"/w/images/thumb/3/34/2hug_icon.png/25px-2hug_icon.png"},
-		{id:"acg",	color:"#206000",icon:"/w/images/thumb/3/31/Acg_icon.png/25px-Acg_icon.png"},
 		{id:"aceg",	color:"#CE5200",icon:"/w/images/thumb/e/e5/Aceg_icon.png/25px-Aceg_icon.png"},
 		{id:"akg",	color:"#171727",icon:"/w/images/thumb/0/07/Akg_icon.png/38px-Akg_icon.png"},
 		{id:"assg",	color:"#C62B29",icon:"/w/images/5/55/Assg_icon.png"},
