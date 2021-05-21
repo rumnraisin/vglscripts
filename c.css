@@ -3,8 +3,6 @@
 /* ouline shit goes here */
 .teamakg{ text-shadow: 0 0 3px white; }
 .teamakg::before{text-shadow: none;}
-.teamdlg{ text-shadow: 0 0 1px white; }
-.teamdlg::before{text-shadow: none;}
 
 .username::before{
 	content:"AA";
