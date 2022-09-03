@@ -63,9 +63,9 @@ $( document ).ready(function() {
 		$('#nav-collapsible ul:first-child').append("<li class='dropdown'><a class='dropdown-toggle' href='#' data-toggle='dropdown' aria-expanded='false'>Match Schedule<b class='caret'></b></a><ul class='dropdown-menu' id='matchSchedule'><li>Times in UTC</li></ul></li>");
 		for(var i = 1; i <= 12; i++){
 			if (i == 1){
-				$('#matchSchedule').append('<li id="day2"></li>');
+				$('#matchSchedule').append('<li id="day1"></li>');
 			} else if (i == 7) {
-				$('#matchSchedule').append('<li id="day3"></li>');
+				$('#matchSchedule').append('<li id="day2"></li>');
 			}
 			$('#matchSchedule').append('<li id="match' + i + '"></li>');
 		}
