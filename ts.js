@@ -255,8 +255,15 @@ var TeamLists = {
 		{id:"きらら",		color:"#ff678f",icon:"/w/images/9/9a/%E3%81%8D%E3%82%89%E3%82%89_icon.png"},
 	],
 	"meme":[
-		{id:"a",	color:"#FF0099",icon:"/w/images/thumb/3/3a/A_icon.png/25px-A_icon.png"},
-		{id:"sp",	color:"#990000",icon:"/w/images/thumb/8/83/Sp_icon.png/25px-Sp_icon.png"},
+		{id:"animeswords",	color:"#E31B22",icon:"/w/images/thumb/b/b4/Animeswords_icon.png/25px-Animeswords_icon.png"},
+		{id:"aniplex",	color:"#3838A6",icon:"/w/images/thumb/0/0f/Aniplex_icon.png/25px-Aniplex_icon.png"},
+		{id:"ccpg",	color:"#DE2910",icon:"/w/images/thumb/f/fd/Ccpg_icon.png/25px-Ccpg_icon.png"},
+		{id:"cute",	color:"#EBA39D",icon:"https://implyingrigged.info/w/images/thumb/6/63/Cute_icon.png/25px-Cute_icon.png"},
+		{id:"cygames",	color:"#61AFEF",icon:"https://implyingrigged.info/w/images/thumb/f/fb/Cygames_icon.png/25px-Cygames_icon.png"},
+		{id:"eroge",	color:"#FFCC4D",icon:"https://implyingrigged.info/w/images/thumb/f/f6/Eroge_icon.png/25px-Eroge_icon.png"},
+		{id:"racism",	color:"#FFF219",icon:"https://implyingrigged.info/w/images/thumb/9/9a/Racism_icon.png/25px-Racism_icon.png"},
+		{id:"skfc",	color:"#FFFFFF",icon:"https://implyingrigged.info/w/images/thumb/b/bc/Skfc_icon.png/25px-Skfc_icon.png"},
+		{id:"tamsoft",	color:"#023894",icon:"https://implyingrigged.info/w/images/thumb/9/9c/Tamsoft_icon.png/25px-Tamsoft_icon.png"},
 	]
 
 
