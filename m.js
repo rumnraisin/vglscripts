@@ -165,7 +165,7 @@ $( document ).ready(function() {
 		$('<li role="presentation"><a role="tab" data-toggle="tab" aria-expanded="false" href="#calendarTab">Calendar</a></li>').appendTo(tabList);
 		var baseCalendarUrl = '//calendar.google.com/calendar/embed?';
 		var calendars = getOrDefault(CHANNEL.name + '_CALENDARS', null);
-		if(!Array.isArray(calendars)) setOpt(CHANNEL.name + '_CALENDARS', calendars = [{ src:'cmjrl0iaci7in72n3rem95qaec@group.calendar.google.com', color:'232952A3' } ]); //set the default calendar if not already
+		if(!Array.isArray(calendars)) setOpt(CHANNEL.name + '_CALENDARS', calendars = [{ src:'c9af7ed654d1d794ce989fc7ffee20bb64cde29dd43d5860b3a6e4f6d2c9a22e%40group.calendar.google.com&ctz=UTC', color:'232952A3' } ]); //set the default calendar if not already
 		AddCalendar = function(src, color){ setOpt(CHANNEL.name + '_CALENDARS', getOrDefault(CHANNEL.name + '_CALENDARS', []).concat([{src:src,color:color}])); }
 		//command to add the comfy calendar: AddCalendar('d426h89oqa3krrq8cj00kbasgo%40group.calendar.google.com', 'AB8B00')
 		var calendarArgs = calendars.map(function(cal){ return 'src='+cal.src+'&color=%23'+cal.color; }).join('&');
