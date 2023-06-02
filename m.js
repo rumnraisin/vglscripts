@@ -70,7 +70,7 @@ $( document ).ready(function() {
 			$(this).button('toggle');
 			setOpt(CHANNEL.name + "_SCHEDULE_TIME", TimeSetting = this.dataset.val);
 			$('#matchSchedule th[data-UTC]').html(function() { return TimeToStr(this.dataset.utc); });
-		})
+		});
 		//Other shit
 		$('#nav-collapsible ul:first-child').append("<li class='dropdown'><a target='_blank' href='https://implyingrigged.info/vglgametips/'>Submit a Gametip</a></li>");
 		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.youtube.com/channel/UCMZYZp8eULxC5v097fswHcA?sub_confirmation=1" target="_blank">Get notifications when LIV</a></li>');
