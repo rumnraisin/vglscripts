@@ -91,7 +91,7 @@ $( document ).ready(function() {
 		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.youtube.com/channel/UCMZYZp8eULxC5v097fswHcA?sub_confirmation=1" target="_blank">Get notifications when LIV</a></li>');
 		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.youtube.com/channel/UCMZYZp8eULxC5v097fswHcA" target="_blank"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico"/></a></li>');
 		$('#nav-collapsible ul:first-child').append('<li><a href="https://boards.4channel.org/vg/catalog#s=vglg" target="_blank"><img src="https://s.4cdn.org/image/favicon.ico"/></a></li>');
-		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.twitch.tv/vglvods" target="_blank"><img src="https://assets.help.twitch.tv/favicon.ico" width=16 /></a></li>');
+		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.twitch.tv/vglvods" target="_blank"><img src="https://static.twitchcdn.net/assets/favicon-32-e29e246c157142c94346.png" width=16 /></a></li>');
 	}
 	
 	/* Tabs */ {
@@ -409,4 +409,111 @@ function chatImageToVideo(div){
 				}
 			}
 		});
+}
+function TimeToStr(time){
+	time = new Date(parseInt(time) || time);
+	switch (TimeSetting) {
+		case 'Countdown': 
+			let diff = (time.valueOf() - Date.now()) / 1000;
+			if (0 <= diff && diff < 86400) return $`0${Math.ceil(diff / 3600)}h0${Math.ceil(diff / 60 % 60)}m${Math.ceil(diff % 60)}s`.replaceAll(/0(\d\d)/g, '$1');
+		case 'UTC': return time.toUTCString().substring(17, 22);
+		case 'Local 24h': return time.toTimeString().substring(0, 5);
+		case 'Local 12h': return `0${(time.getHours() % 12) || 12}:0${time.getMinutes()} ${time.getHours() < 12 ? "AM" : "PM"}`.replaceAll(/0(\d\d)/g, '$1');
+	}
+}
+
+ScheduleLoaded = false;
+function SetMatchSchedule(pageName) {
+	if (ScheduleLoaded) 
+		return;
+	
+	//Load the cup page HTML from the wiki
+	$.getJSON('https://implyingrigged.info/w/api.php?action=parse&prop=text&formatversion=2&format=json&origin=*&page=' + pageName, function(data) {
+		//Load the HTML into a virtual document to avoid loading images
+		var ownerDocument = document.implementation.createHTMLDocument('virtual');
+		//Transform all the match elements into list items and group them by date
+		//{ "99 Month 2000": [ { time: new Date("99 Month 2000 17:00 UTC"), match:"<td>home</td><td> vs </td><td>away</td>" } ] }
+		var Days = {}
+		$(data.parse.text, ownerDocument).find('.vevent')
+			.each((i, m) => (Days[$(m).find('.matchdate').html()] ||= []).push({ time: new Date(`${$(m).find('.matchdate').html()} ${$(m).find('.matchtime abbr').html()} UTC`), match:`<td class="sHome">${$(m).find('.matchhome>b').text()}</td><td class="vs">vs</td><td class="sAway">${$(m).find('.matchaway>b').text()}</td>`}));
+		//Sort the days and times
+		//[ { date: new Date("99 Month 2000"), matches:[ { time: new Date("99 Month 2000 17:00 UTC"), match:"<td>home</td><td> vs </td><td>away</td>" } } ]
+		Days = Object.entries(Days).map(kvp => ({ date:new Date(kvp[0]), matches:kvp[1].sort((a, b) => a.time.valueOf() - b.time.valueOf()) })).sort((a, b) => a.date.valueOf() - b.date.valueOf());
+		
+		let Times = [], Rows = [], timeSetting = getOrDefault(CHANNEL.name + "_SCHEDULETIME", "UTC");
+		//This will be the top left cell of the table
+		let DayHeaders = `<td style="background:grey" rowspan="2"><a href="https://implyingrigged.info/wiki/${pageName}">Cup Page</a></td>`;
+		let DateHeaders = "", Cols = "<col/>"
+		//Build up the rows and headers day by day
+		for (let d = 0; d < Days.length; ++d){
+			let day = Days[d];
+			//If all the times match the current row headers, we don't need to overwrite them
+			if (Times.every((time, i) => i >= day.matches.length || day.matches[i].time.toTimeString() == time.toTimeString())) {
+				//subsequent days might have more matches so add the extra timeslots if necessary (including on Day 1 when we start with 0 times) 
+				for (let match of day.matches.slice(Times.length)){
+					Times.push(match.time);
+					let colspan = Rows[0]?.match(/\/td/g)?.length || 0;
+					Rows.push(`<th data-utc="${match.time.valueOf()}">${TimeToStr(match.time)}</th>${colspan > 0 ? `<td colspan="${colspan}" style="background-color: #14161af5;"></td>` : ""}`);
+				}
+			} else {
+				//This matchday has different times from the previous, so we need a new column of times (the header column is empty)
+				Times = day.matches.map(m => m.time);
+				DayHeaders += "<td></td>";
+				DateHeaders += "<td></td>";
+				Cols += '<col/>'
+				Times.forEach((t, i) => Rows[i] += `<th data-utc="${t.valueOf()}">${TimeToStr(t)}</th>`);
+			}
+			//Add the actual data for the day
+			DayHeaders += `<th colspan="3">Day ${d+1}</th>`;
+			DateHeaders += `<th colspan="3">${day.date.toDateString().substring(0, 11)}</th>`;
+			Cols += '<col span="3"/>';
+			for (let m = 0; m < Rows.length; ++m){
+				Rows[m] += day.matches[m]?.match || '<td colspan="3"></td>';
+			}
+		}
+		//Actually make the table
+		$('#matchSchedule>li').remove();
+		let table = $(`<li><table><colgroup>${Cols}</colgroup><thead><tr>${DayHeaders}</tr><tr>${DateHeaders}</tr></thead><tbody>${Rows.map(r => `<tr>${r}</tr>`).join('')}</tbody></table></li>`)
+			.on('mouseover', 'td, th', function(){
+				//Highlight other cells with the same team on hover. Return immediately if we happen to have already done that.
+				if (this.classList.contains("highlight")) return;
+				let className = this.className;
+				$('#matchSchedule .highlight').removeClass("highlight"); //remove the old highlights
+				let isMatchCell = this.tagName == 'TD' && this.innerHTML && this.cellIndex;
+				if (isMatchCell && this.innerHTML != 'vs' && this.innerHTML != 'TBD')
+					$(`#matchSchedule td:contains('${this.innerHTML}')`).addClass("highlight");
+				
+				//put a lighter background on the match cells and also the column's header cells
+				if (isMatchCell && !this.classList.contains("hover")){
+					$('#matchSchedule .hover').removeClass("hover");
+					let start = this.cellIndex + { sHome: 0, vs: -1, sAway: -2 }[className];
+					Array.prototype.slice.call(this.parentElement.children, start, start + 3).forEach(e => e.classList.add("hover"));
+					$(`#matchSchedule thead th:nth-of-type(${$(this).prevAll(".vs").length + (this.classList.contains("sAway") ? 0 : 1)})`).addClass("hover");
+				    $('#matchSchedule .timehighlight').removeClass("timehighlight");
+					$(this).prevAll("th").first().addClass("timehighlight");
+				}
+				else if (this.tagName == 'TH') {
+					$('#matchSchedule .hover').removeClass("hover");
+				    $('#matchSchedule .timehighlight').removeClass("timehighlight");
+					if (this.colSpan == 3) $(`#matchSchedule thead th:nth-of-type(${$(this).prevAll('th').length + 1})`).addClass("hover");
+				}
+				
+			})
+			.on('mouseleave', function() { 
+			    //remove all the highlights when the mouse leaves the table
+				$('#matchSchedule .highlight').removeClass("highlight");
+				$('#matchSchedule .hover').removeClass("hover");
+				$('#matchSchedule .timehighlight').removeClass("timehighlight");
+			})
+			.appendTo('#matchSchedule');
+		
+		//Update all the times every 1 second
+		setInterval(function(){
+			if (TimeSetting == 'Countdown')
+				$('#matchSchedule th[data-UTC]').html(function() { return TimeToStr(this.dataset.utc); });
+			//TODO: a day countdown?
+		}, 1000);
+		
+		ScheduleLoaded = true;
+    });
 }
