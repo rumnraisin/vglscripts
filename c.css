@@ -235,3 +235,16 @@ body { overflow-y:scroll; }
 #verticalPollsCheckbox:checked~div .option { display: block; margin: 3px 0 0 0; }
 body { background-attachment: fixed; }
 #messagebuffer, html { scrollbar-color: #444 #222; }
+
+#matchSchedule td { text-align: center; }
+#matchSchedule .sHome { text-align: right; }
+#matchSchedule .sAway { text-align: left; }
+#matchSchedule table { overflow: hidden; z-index: 1; }
+#matchSchedule td { padding: 0 2px;  }
+#matchSchedule th { text-align: center; padding: 0 2px; white-space: nowrap; }
+#matchSchedule tbody th { padding: 0 5px; }
+#matchSchedule col[span="3"]:nth-child(even) { background-color: #FFFFFF1F }
+#matchSchedule tbody tr { border-top: #565656 1px solid; } 
+#matchSchedule .timehighlight { background-color: #FFFFFF4F; color: #FFFFFF; }
+#matchSchedule .hover { background-color: #FFFFFF4F; }
+#matchSchedule .highlight { color: #FFFFFF; text-shadow: 0.5px 0.5px 0px #FFFFFF; }
