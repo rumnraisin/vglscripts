@@ -60,34 +60,19 @@ $( document ).ready(function() {
 			$('#btn_emoteSize').click();
 	
 		//Match Schedule
-		$('#nav-collapsible ul:first-child').append("<li class='dropdown'><a class='dropdown-toggle' href='#' data-toggle='dropdown' aria-expanded='false'>Match Schedule<b class='caret'></b></a><ul class='dropdown-menu' id='matchSchedule'><li>Times in UTC</li></ul></li>");
-		for(var i = 1; i <= 24; i++){
-			if (i == 1){
-				$('#matchSchedule').append('<li id="day1"></li>');
-			} else if (i == 9) {
-				$('#matchSchedule').append('<li id="day2"></li>');
-			} else if (i == 17) {
-				$('#matchSchedule').append('<li id="day3"></li>');
-			}
-			$('#matchSchedule').append('<li id="match' + i + '"></li>');
-		}
-		$('#matchSchedule').append("<li><a style='background:grey' href='https://implyingrigged.info/wiki//vg/_League_15'>Cup Page</a></li>");
+		$('#nav-collapsible ul:first-child').append("<li class='dropdown'><a class='dropdown-toggle' href='#' data-toggle='dropdown' aria-expanded='false'>Match Schedule<b class='caret'></b></a><ul class='dropdown-menu' id='matchSchedule'>Time Setting: </ul></li>");
+		let btnGrp = $('<div class="btn-group" data-toggle="buttons"></div>').appendTo('#matchSchedule');
+		['UTC', 'Local 24h', 'Local 12h', /*'Countdown'*/].forEach(val => //TODO: make Countdown actually work, move label and td CSS to external
+			btnGrp.append(`<label class="btn btn-primary${val == TimeSetting ? ' active' : ''}" data-val="${val}" style="padding: 3px 7px;"><input type="radio" name="scheduleTime" autocomplete="off"${val == TimeSetting ? ' checked' : ''}>${val}</label>`));
+		
+		btnGrp.on("click", "label", function(event) { 
+			event.stopPropagation();
+			$(this).button('toggle');
+			setOpt(CHANNEL.name + "_SCHEDULE_TIME", TimeSetting = this.dataset.val);
+			$('#matchSchedule th[data-UTC]').html(function() { return TimeToStr(this.dataset.utc); });
+		})
 		//Other shit
 		$('#nav-collapsible ul:first-child').append("<li class='dropdown'><a target='_blank' href='https://implyingrigged.info/vglgametips/'>Submit a Gametip</a></li>");
-		$('#btn_autoreply').click(function(){
-			if ($(this).text() == 'Turn on Autoreply'){
-				$(this).text('Turn off Autoreply');
-			} else {
-				$(this).text('Turn on Autoreply');
-			}
-		});
-	
-		var previousMessage = "";
-		var autoReplyCooldown = false;
-	
-		window.setInterval(function(){
-			autoReplyCooldown	= false;
-			}, 30000);
 		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.youtube.com/channel/UCMZYZp8eULxC5v097fswHcA?sub_confirmation=1" target="_blank">Get notifications when LIV</a></li>');
 		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.youtube.com/channel/UCMZYZp8eULxC5v097fswHcA" target="_blank"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico"/></a></li>');
 		$('#nav-collapsible ul:first-child').append('<li><a href="https://boards.4channel.org/vg/catalog#s=vglg" target="_blank"><img src="https://s.4cdn.org/image/favicon.ico"/></a></li>');
