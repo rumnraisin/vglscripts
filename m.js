@@ -374,6 +374,30 @@ $( document ).ready(function() {
 	$('#messagebuffer').attr('style', null);
 	$('#userlisttoggle').click();
 	
+		//Expand images in chat and copy emotes
+    $('#messagebuffer').off('click').click(e => { 
+        let t = e.target, p = t.parentElement;
+        if(e.button != 0) return;
+        if(t.className == 'channel-emote')
+            $('#chatline').val((i, v) => v + ' ' + e.target.title).focus();
+        else if(t.tagName == "IMG") {
+            e.preventDefault();
+            $('<div id="picoverlay"></div>').click(f => $('#picoverlay').remove()).prependTo('body').append($(p).clone());
+        } else if(t.tagName == "VIDEO") {
+            e.preventDefault();
+            $('<div id="picoverlay"></div>').click(f => $('#picoverlay').remove()).prependTo('body').append($('<video autoplay controls/>').attr('src', t.src));
+        }
+    });
+	
+	//Set the usercount text to something funny
+	Callbacks.usercount = function(count) {
+        CHANNEL.usercount = count; 
+        var text = count + (UserCountLabel || " connected users");
+        if (count === 69) 
+          text += ' (nice)';
+        $("#usercount").html(text);
+    };
+	
 	//convert videos already in chat
 	chatImageToVideo($("#messagebuffer"));
 });
@@ -503,4 +527,38 @@ function SetMatchSchedule(pageName) {
 		
 		ScheduleLoaded = true;
     });
+}
+
+Cups = [
+	{ 
+		page: "Main_Page",
+		name: "4chan Cup",
+		date: "Offseason",
+		icon: "https://cdn.discordapp.com/attachments/214033499814887425/445004747989057546/clover_logo_2.png",
+		chan: null
+	}
+];
+function SetCups(height, fontsize, cups) {
+	Cups = cups;
+	let cupHtmls = cups.map(cup => {
+		cup.page = cup.page || cup[0] || null;
+		cup.name = cup.name || cup[1] || null;
+		cup.date = cup.date || cup[2] || null;
+		cup.icon = cup.icon || cup[3] || null;
+		cup.chan = cup.chan || cup[4] || null;
+		cup.icon = (cup.icon || "").startsWith("/") ? "https://implyingrigged.info"+cup.icon : cup.icon;
+		return `<a href="https://implyingrigged.info/wiki/${cup.page}">${cup.icon ? `<img src="${cup.icon}" height="${height}"/> ` : ""}${cup.name}:</a> ${cup.date}${cup.chan ? ` <a href="${cup.chan}"><img src="https://cdn.discordapp.com/attachments/529576837852954626/1015280261883248690/11183772.png" height="${height}"/>` : ""}`;
+	});
+	cupHtmls[0] = `<b>${cupHtmls[0]}</b>`;
+	$("#streamtitle").remove();
+	$("#videowrap>.embed-responsive").after(`<span id="streamtitle" style="font-size:${fontsize}px;">${cupHtmls.join(" | ")}</span>`);
+}
+function ChallongeTab(challongeLink, tabTitle) {
+	$("#challongeTabButton").remove();
+	$("#challongeTab").remove();
+	if (challongeLink) {
+		let challongeTab = $('<div role="tabpanel" class="tab-pane" id="challongeTab"></div>').appendTo('#MainTabContainer>div');
+		challongeTab.append(`<iframe src="${challongeLink}/module?show_tournament_name=1" width="100%" height="1000" frameborder="0" scrolling="auto" allowtransparency="true"></iframe>`);
+		$('#MainTabContainer>ul').append('<li role="presentation"><a role="tab" data-toggle="tab" aria-expanded="false" href="#challongeTab" id="challongeTabButton" style="padding: 5px 10px;">GARBAGE DAY <img src="https://implyingrigged.info/cytube/emotes/garbageday.png" height="30"></a></li>');
+	}
 }
