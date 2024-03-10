@@ -298,7 +298,7 @@ InitTeamLists();
 if(getOrDefault(CHANNEL.name + "_SELECTTEAM_GRID", false))
 	$('#toggleTeamSelStyle').click();
 var TEAMCOLOR = getOrDefault(CHANNEL.name + "_TEAMCOLOR", '');
-setTeamList("4cc");
+setTeamList("bag");
 if (TEAMCOLOR){
 	$("#selectteam>span>img").attr("src", AllTeams[TEAMCOLOR].icon);
 }
