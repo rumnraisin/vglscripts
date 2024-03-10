@@ -266,6 +266,24 @@ var TeamLists = {
 		{id:"racism",	color:"#FFF219",icon:"https://implyingrigged.info/w/images/thumb/9/9a/Racism_icon.png/25px-Racism_icon.png"},
 		{id:"skfc",	color:"#FFFFFF",icon:"https://implyingrigged.info/w/images/thumb/b/bc/Skfc_icon.png/25px-Skfc_icon.png"},
 		{id:"tamsoft",	color:"#023894",icon:"https://implyingrigged.info/w/images/thumb/9/9c/Tamsoft_icon.png/25px-Tamsoft_icon.png"},
+	],
+	"bag":[
+		{id:"abydos",	color:"#62c7de",icon:"/w/images/8/85/Abydos_icon.png"},
+		{id:"affection",	color:"#ffddf4",icon:"/w/images/c/c3/Affection_icon.png"},
+		{id:"ako",	color:"#bbcfe7",icon:"/w/images/a/ad/Ako_icon.png"},
+		{id:"bacommies",	color:"#FF0000",icon:"/w/images/d/d8/BAcommies_icon.png"},
+		{id:"candc",	color:"#FFFFFF",icon:"/w/images/a/ac/C%26C_icon.png"},
+		{id:"coomindoom",	color:"#FEBF00",icon:"/w/images/e/e3/Coomindoom_icon.png"},
+		{id:"deca",	color:"#F2F2F2",icon:"/w/images/6/6d/Deca_icon.png"},
+		{id:"gdd",	color:"#1DFBD7",icon:"/w/images/0/02/Gdd_icon.png"},
+		{id:"gehenna",	color:"#FF2400",icon:"/w/images/8/8c/Gehenna_icon.png"},
+		{id:"hyakkiyako",	color:"#E26EA1",icon:"/w/images/0/0d/Hyakkiyako_icon.png"},
+		{id:"millennium",	color:"#4F85F6",icon:"/w/images/b/be/Millennium_icon.png"},
+		{id:"npc",	color:"#808080",icon:"/w/images/e/e5/Npc_icon.png"},
+		{id:"pakeji",	color:"#01d2ff",icon:"/w/images/1/13/Pakeji_icon.png"},
+		{id:"sechi",	color:"#fa9c2a",icon:"/w/images/e/e4/Sechi_icon.png"},
+		{id:"srt",	color:"#5B72A4",icon:"/w/images/f/f4/Srt_icon.png"},
+		{id:"trinity",	color:"#8bc2d2",icon:"/w/images/0/01/Trinity_icon.png"},
 	]
 
 
