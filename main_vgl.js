@@ -93,10 +93,10 @@ $( document ).ready(function() {
 
 		//Other shit
 		$('#nav-collapsible ul:first-child').append("<li class='dropdown'><a target='_blank' href='https://implyingrigged.info/vglgametips/'>Submit a Gametip</a></li>");
-		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.youtube.com/channel/UCMZYZp8eULxC5v097fswHcA?sub_confirmation=1" target="_blank">Get notifications when LIV</a></li>');
-		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.youtube.com/channel/UCMZYZp8eULxC5v097fswHcA" target="_blank"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico"/></a></li>');
 		$('#nav-collapsible ul:first-child').append('<li><a href="https://boards.4chan.org/vg/catalog#s=vglg" target="_blank"><img src="https://s.4cdn.org/image/favicon.ico"/></a></li>');
-		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.twitch.tv/vglvods" target="_blank"><img src="https://static.twitchcdn.net/assets/favicon-32-e29e246c157142c94346.png" width=16 /></a></li>');
+		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.youtube.com/channel/UCMZYZp8eULxC5v097fswHcA?sub_confirmation=1" target="_blank" style="cursor:pointer;" title="Get notifications when the Cup is liv">🔔</a></li>');
+		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.youtube.com/channel/UCMZYZp8eULxC5v097fswHcA" target="_blank" style="cursor:pointer;" title="Open the YouTube channel"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico"/></a></li>');
+		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.twitch.tv/vglvods" target="_blank" style="cursor:pointer;" title="Watch on Twitch (much better video quality)"><img src="https://static.twitchcdn.net/assets/favicon-32-e29e246c157142c94346.png" width=16 /></a></li>');
 	}
 	
 	/* Tabs */ {
