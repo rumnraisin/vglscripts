@@ -1,11 +1,28 @@
+//-Modded external js for VGL-
+//Version of original 4cc main.js: 12/03/2024
+//Changes:
+//Uses teamcolor_vgl.js with VGL team lists
+//Replaced the buttons on the top bar with vgl link buttons
+//Replaced default 4cc calendar with vgl calendar
+//Changed the default cup title to /vg/ League
+
 $('<link id="chanfavicon" href="https://implyingrigged.info/w/images/d/df/Vglg_icon.png" type="image/x-icon" rel="shortcut icon" />').appendTo("head");
-$('.navbar-brand').attr('href','https://implyingrigged.info/wiki//vg/_League').text(' /vg/ League').css('padding', '0 10px 0 0').prepend('<img src="https://implyingrigged.info/w/images/d/df/Vglg_icon.png" style="display: inline;" height="20"/>');
-$('head').append('<script type="text/javascript" src="https://rumnraisin.github.io/vglscripts/nnd.js">');
-$('head').append('<script type="text/javascript" src="https://rumnraisin.github.io/vglscripts/ts.js">');
-//$('head').append('<script type="text/javascript" src="https://implyingrigged.info/cytube/anon.js">');
-$('head').append('<script type="text/javascript" src="https://rumnraisin.github.io/vglscripts/em.js">');
+$('.navbar-brand').attr('href','https://implyingrigged.info/wiki//vg/_League').text(' /vg/ League').css('padding', '0 10px 0 0').prepend('<img src="https://implyingrigged.info/w/images/d/df/Vglg_icon.png" style="display: inline;" height="20"/>');$('head').append('<script type="text/javascript" src="https://rumnraisin.github.io/vglscripts/nnd.js">');
+$('head').append(`<script type="text/javascript" id="teamcolorJS" src="https://rumnraisin.github.io/vglscripts/teamcolor_vgl.js?${Date.now()}">`);
 TimeSetting = getOrDefault(CHANNEL.name + "_SCHEDULE_TIME", "UTC");
-//test
+
+//Overwrite the custom media load function to skip the warning message if the URL is angelthump
+var playerType = window.CustomEmbedPlayer;
+playerType.prototype.originalLoad = playerType.prototype.load;
+playerType.prototype.load = function(data) { 
+    return ['https://player.angelthump.com/?channel=', 'https://player.kick.com/'].some(s => data.meta.embed.src.startsWith(s)) 
+        ? playerType.__super__.load.call(this, data) 
+        : playerType.prototype.originalLoad.call(this, data); 
+}
+//Click the embed button if the alert is already on the page before this runs
+$('#ytapiplayer a[href^="https://player.angelthump.com/?channel="] ~ button, #ytapiplayer a[href^="https://player.kick.com/"] ~ button').click();
+
+//keep track of all the users that ever enter chat
 $( document ).ready(function() {
 	/* Navbar */ { 
 		//Options/Account
@@ -18,7 +35,7 @@ $( document ).ready(function() {
 				$(this).parent().find('.dropdown-menu').detach().appendTo('#welcome');
 				$(this).parent().remove();
 			} else if ($(this).text() == 'Layout'){ 
-				$(this).html($(this).html().replace('Layout','<b>⚙</b>'));
+				$(this).html($(this).html().replace('Layout','️<b>⚙</b>'));
 				$(this).parent().attr('ID','settingsMenu');
 				$('li a').each(function(){
 					if($(this).text() == 'Options'){
@@ -43,6 +60,7 @@ $( document ).ready(function() {
 				else
 					$('#selectteam').removeClass('grid');
 			});
+		
 		//Bigger Emotes
 		$('<button id="btn_emoteSize" class="btn">Emote Size: <span>Small</span><span>Big</span></button>')
 			.appendTo('#settingsMenu .dropdown-menu')
@@ -72,12 +90,12 @@ $( document ).ready(function() {
 			setOpt(CHANNEL.name + "_SCHEDULE_TIME", TimeSetting = this.dataset.val);
 			$('#matchSchedule th[data-UTC]').html(function() { return TimeToStr(this.dataset.utc); });
 		})
-		
+
 		//Other shit
 		$('#nav-collapsible ul:first-child').append("<li class='dropdown'><a target='_blank' href='https://implyingrigged.info/vglgametips/'>Submit a Gametip</a></li>");
 		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.youtube.com/channel/UCMZYZp8eULxC5v097fswHcA?sub_confirmation=1" target="_blank">Get notifications when LIV</a></li>');
 		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.youtube.com/channel/UCMZYZp8eULxC5v097fswHcA" target="_blank"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico"/></a></li>');
-		$('#nav-collapsible ul:first-child').append('<li><a href="https://boards.4channel.org/vg/catalog#s=vglg" target="_blank"><img src="https://s.4cdn.org/image/favicon.ico"/></a></li>');
+		$('#nav-collapsible ul:first-child').append('<li><a href="https://boards.4chan.org/vg/catalog#s=vglg" target="_blank"><img src="https://s.4cdn.org/image/favicon.ico"/></a></li>');
 		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.twitch.tv/vglvods" target="_blank"><img src="https://static.twitchcdn.net/assets/favicon-32-e29e246c157142c94346.png" width=16 /></a></li>');
 	}
 	
@@ -150,11 +168,10 @@ $( document ).ready(function() {
 		//Calendar Tab
 		$('<div role="tabpanel" class="tab-pane" id="calendarTab"><iframe width="100%" height="600" frameborder="0" scrolling="no"></iframe></div>').appendTo(tabContent);
 		$('<li role="presentation"><a role="tab" data-toggle="tab" aria-expanded="false" href="#calendarTab">Calendar</a></li>').appendTo(tabList);
-		var baseCalendarUrl = '//calendar.google.com/calendar/embed?';
+		var baseCalendarUrl = '//www.google.com/calendar/embed?showTitle=0&showNav=1&showDate=1&showTabs=1&showCalendars=1&showTz=1&wkst=1&showPrint=0&hl=en&';
 		var calendars = getOrDefault(CHANNEL.name + '_CALENDARS', null);
-		if(!Array.isArray(calendars)) setOpt(CHANNEL.name + '_CALENDARS', calendars = [{ src:'c9af7ed654d1d794ce989fc7ffee20bb64cde29dd43d5860b3a6e4f6d2c9a22e%40group.calendar.google.com&ctz=UTC', color:'232952A3' } ]); //set the default calendar if not already
+		if(!Array.isArray(calendars)) setOpt(CHANNEL.name + '_CALENDARS', calendars = [{ src:'c9af7ed654d1d794ce989fc7ffee20bb64cde29dd43d5860b3a6e4f6d2c9a22e%40group.calendar.google.com', color:'2952A3' } ]); //set the default calendar if not already
 		AddCalendar = function(src, color){ setOpt(CHANNEL.name + '_CALENDARS', getOrDefault(CHANNEL.name + '_CALENDARS', []).concat([{src:src,color:color}])); }
-		//command to add the comfy calendar: AddCalendar('d426h89oqa3krrq8cj00kbasgo%40group.calendar.google.com', 'AB8B00')
 		var calendarArgs = calendars.map(function(cal){ return 'src='+cal.src+'&color=%23'+cal.color; }).join('&');
 		$('#calendarTab iframe').attr('src', baseCalendarUrl+calendarArgs+'&');
 		
@@ -200,7 +217,8 @@ $( document ).ready(function() {
 				2 <= CLIENT.rank && 0 === t.indexOf("/m ") && (a.modflair = CLIENT.rank,
 				t = t.substring(3));
 				var o = t.replace(/\s/g, "");
-				if (CLIENT.rank < 2 && (window.CERTIFIED_IMAGE_POSTERS !== undefined && !CERTIFIED_IMAGE_POSTERS[CLIENT.name])){
+				
+				if (CLIENT.rank < 2 && !(CERTIFIED_IMAGE_POSTERS && CERTIFIED_IMAGE_POSTERS.includes(CLIENT.name))){
 					t = t.replace(':pic','');
 				}
 				if (/skettifactory/.test(o) && "skettifactory" !== CHANNEL.name.toLowerCase())
@@ -214,12 +232,11 @@ $( document ).ready(function() {
 					}),
 					void socket.disconnect();
 				previousMessage = t.trim();
-				if (TEAMCOLOR){
+				//add the teamcolor code, but only if its not a mod command
+				if (TEAMCOLOR && t.match(/^\/(h?poll|(s|un)?mute|kick|(ip)?ban|clean)\b/gi) === null){
 					t = t + ' -team' + TEAMCOLOR + '-';
 					a.modflair = 'b';
 				}
-				var emotes = t.match(/(:[^:]+:)/g);
-				//emoteMammory(emotes);
 				socket.emit("chatMsg", {
 					msg: t,
 					meta: a
@@ -260,9 +277,9 @@ $( document ).ready(function() {
 		last.name = data.username;
 		
 		//4CC Team Colors
-		var teamClass = data.msg.match(/(-team.+-)/gi);
+		var teamClass = data.msg.match(/(-team\S+-<\/span>$)/gi);
 		if (teamClass){
-			teamClass = teamClass[0].replace(new RegExp('-','g'),'');
+			teamClass = teamClass[0].replace(/-|(<\/span>)/g,'');
 		} else {
 			teamClass = '';
 		}
@@ -293,7 +310,8 @@ $( document ).ready(function() {
 		if (!skip) {
 			name.appendTo(div);
 		}
-		$("<strong/>").addClass("username " + teamClass).text(data.username + ": ").appendTo(name);
+		$("<strong/>").addClass("username").text(data.username + ": ").appendTo(name);
+		div.addClass(teamClass);
 		if (data.meta.modflair) {
 			name.addClass(getNameColor(data.meta.modflair));
 		}
@@ -328,8 +346,7 @@ $( document ).ready(function() {
 		//Validate ":pic" posts: only mods and approved users
 		var imgs = div.find('a>img').not('.channel-emote').parent();
 		if (imgs.length){
-			var canPostImages = (window.CERTIFIED_IMAGE_POSTERS !== undefined && CERTIFIED_IMAGE_POSTERS[data.username])
-			   || $(".userlist_item:contains('"+data.username+"'):has(.userlist_op, .userlist_owner)").length !== 0;
+			var canPostImages = (CERTIFIED_IMAGE_POSTERS && CERTIFIED_IMAGE_POSTERS.includes(data.username)) || $(".userlist_item:contains('"+data.username+"'):has(.userlist_op, .userlist_owner, .userlist_siteadmin)").length !== 0;
 			if (!canPostImages){
 				imgs.each(function(){ this.innerHTML = $(this).attr('href'); });
 			}
@@ -374,7 +391,28 @@ $( document ).ready(function() {
 	$('#messagebuffer').attr('style', null);
 	$('#userlisttoggle').click();
 	
-		//Expand images in chat and copy emotes
+	//Overwrite the "play next video" handler to disable synch when the stream is from picarto, otherwise set it back to the saved setting
+	var changeMediaBase = Callbacks.changeMedia;
+	var picartoPattern = /^https:\/\/[\w-]+\.picarto\.tv\//g;
+	Callbacks.changeMedia = function(data) {
+		USEROPTS.synch = data.id.match(picartoPattern) ? false : getOrDefault('synch', true);
+		changeMediaBase(data);
+	};
+	//Handle if a picarto link is already loaded
+	var videoPlayer = document.getElementById('ytapiplayer_html5_api');
+	if (videoPlayer && videoPlayer.src && videoPlayer.src.match(picartoPattern)) {
+		USEROPTS.synch = false;
+	}
+	//Switch back to the saved setting just for when the user settings menu is populated
+	var showUserOptionsBase = showUserOptions;
+	showUserOptions = function() {
+		var orig = USEROPTS.synch;
+		USEROPTS.synch = getOrDefault('synch', true);
+		showUserOptionsBase();
+		USEROPTS.synch = orig;
+	};
+	
+	//Expand images in chat and copy emotes
     $('#messagebuffer').off('click').click(e => { 
         let t = e.target, p = t.parentElement;
         if(e.button != 0) return;
@@ -404,10 +442,10 @@ $( document ).ready(function() {
 
 function chatImageToVideo(div){
 	//convert image embeds that are actually videos to video embeds
-	var videoFileTypes = [ ".webm", ".mp4" ];
+	var videoFileTypes = [ ".webm", ".mp4", '.mov' ];
 	div.find("a>img")
 		.each(function(index, img){ 
-			if(videoFileTypes.some(function(ext){ return img.src.endsWith(ext);	})){
+			if(videoFileTypes.some(function(ext){ return img.src.split('?')[0].endsWith(ext);	})){
 				var toReplace = $(img).parent("a[href='" + img.src + "']");
 				if(toReplace.length == 0)
 					toReplace = $(img);
@@ -421,6 +459,7 @@ function chatImageToVideo(div){
 			}
 		});
 }
+
 function TimeToStr(time){
 	time = new Date(parseInt(time) || time);
 	switch (TimeSetting) {
@@ -433,19 +472,32 @@ function TimeToStr(time){
 	}
 }
 
+function ColorFromImg(url) {
+	let canv = document.createElement("canvas").getContext("2d");
+	let img = new Image();
+	let promise = new Promise((resolve) => img.onload = function(){
+	    canv.drawImage(img, 0, 0, 32, 32);
+	    let color = Object.entries(Array.from(canv.getImageData(0, 0, 32, 32).data).map((d, i, a) => (i%4||a[i+3]<255) ? 0 : d*65536+a[i+1]*256+a[i+2]).filter(s => s).map(s => s.toString(16)).reduce((o, v) => (o[v] = (o[v]|0) + 1) && o, {})).reduce((a, b) => a[1] > b[1] ? a : b)[0];
+		resolve(color);
+	});
+	img.src = url;
+	return promise;
+}
+
 ScheduleLoaded = false;
 function SetMatchSchedule(pageName) {
 	if (ScheduleLoaded) 
 		return;
-	
+	let apiEndpoint = 'https://implyingrigged.info/w/api.php?action=parse&prop=text&formatversion=2&format=json&origin=*&page=';
 	//Load the cup page HTML from the wiki
-	$.getJSON('https://implyingrigged.info/w/api.php?action=parse&prop=text&formatversion=2&format=json&origin=*&page=' + pageName, function(data) {
+	$.getJSON(apiEndpoint + pageName, function(data) {
 		//Load the HTML into a virtual document to avoid loading images
 		var ownerDocument = document.implementation.createHTMLDocument('virtual');
 		//Transform all the match elements into list items and group them by date
 		//{ "99 Month 2000": [ { time: new Date("99 Month 2000 17:00 UTC"), match:"<td>home</td><td> vs </td><td>away</td>" } ] }
 		var Days = {}
-		$(data.parse.text, ownerDocument).find('.vevent')
+		var page = $(data.parse.text, ownerDocument);
+		page.find('.vevent')
 			.each((i, m) => (Days[$(m).find('.matchdate').html()] ||= []).push({ time: new Date(`${$(m).find('.matchdate').html()} ${$(m).find('.matchtime abbr').html()} UTC`), match:`<td class="sHome">${$(m).find('.matchhome>b').text()}</td><td class="vs">vs</td><td class="sAway">${$(m).find('.matchaway>b').text()}</td>`}));
 		//Sort the days and times
 		//[ { date: new Date("99 Month 2000"), matches:[ { time: new Date("99 Month 2000 17:00 UTC"), match:"<td>home</td><td> vs </td><td>away</td>" } } ]
@@ -477,7 +529,7 @@ function SetMatchSchedule(pageName) {
 			//Add the actual data for the day
 			DayHeaders += `<th colspan="3">Day ${d+1}</th>`;
 			DateHeaders += `<th colspan="3">${day.date.toDateString().substring(0, 11)}</th>`;
-			Cols += '<col span="3"/>';
+			Cols += `<col span="3"${d%2 ? '' : 'style="background-color: #FFFFFF1F;"'}/>`;
 			for (let m = 0; m < Rows.length; ++m){
 				Rows[m] += day.matches[m]?.match || '<td colspan="3"></td>';
 			}
@@ -526,15 +578,31 @@ function SetMatchSchedule(pageName) {
 		}, 1000);
 		
 		ScheduleLoaded = true;
+		
+		if (CLIENT.rank < 3 || pageName.includes('4chan'))
+			return;
+		//BONUS: make a team icon list
+		let teams = [].slice.call(page.find('li .badgeicon-med-withborder>a')).map(a => ({
+			id: a.getAttribute('title').replace('/', '').replace('/', '",'),
+			icon: a.querySelector('img')?.getAttribute('src') ?? 'NO ICON LMAO',
+			color: 'NO TEAM PAGE LMAO',
+			pageURL: apiEndpoint + a.href.slice(a.href.indexOf('/wiki/')+6),
+			toString: function() { return `\n        {id:"${this.id.padEnd(12)} color:"${this.color}", icon:"${this.icon}"}`;}
+		}));
+		$.when(...(teams.map(t => $.getJSON(t.pageURL, function(d) {
+			//Load the HTML into a virtual document to avoid loading images
+			let tmpDoc = document.implementation.createHTMLDocument('virtual');
+			t.color = (d.parse && $(d.parse.text, tmpDoc).find('td[width="65%"]>span[style^="color: "]').attr('style')?.replace('color: ','').replace(';','')) || 'NO COLOR LMAO';
+		})))).then(promises => console.log(`    "${pageName}":[`+teams.join(',')+'\n    ],'));
     });
 }
 
 Cups = [
 	{ 
-		page: "Main_Page",
-		name: "4chan Cup",
+		page: "/vg/_League",
+		name: "/vg/ League",
 		date: "Offseason",
-		icon: "https://cdn.discordapp.com/attachments/214033499814887425/445004747989057546/clover_logo_2.png",
+		icon: "https://implyingrigged.info/w/images/thumb/7/74/Vgleague.png/50px-Vgleague.png",
 		chan: null
 	}
 ];
@@ -546,8 +614,9 @@ function SetCups(height, fontsize, cups) {
 		cup.date = cup.date || cup[2] || null;
 		cup.icon = cup.icon || cup[3] || null;
 		cup.chan = cup.chan || cup[4] || null;
-		cup.icon = (cup.icon || "").startsWith("/") ? "https://implyingrigged.info"+cup.icon : cup.icon;
-		return `<a href="https://implyingrigged.info/wiki/${cup.page}">${cup.icon ? `<img src="${cup.icon}" height="${height}"/> ` : ""}${cup.name}:</a> ${cup.date}${cup.chan ? ` <a href="${cup.chan}"><img src="https://cdn.discordapp.com/attachments/529576837852954626/1015280261883248690/11183772.png" height="${height}"/>` : ""}`;
+		cup.ttip = cup.ttip || cup[5] || '';
+		cup.icon = cup.icon ? `<img src="${cup.icon.replace(new RegExp('^/(w/images/(thumb/)?)?'), "https://implyingrigged.info/w/images/thumb/")}" height="${height}"/>` : "";
+		return `<span title="${cup.ttip}"><a href="https://implyingrigged.info/wiki/${cup.page}">${cup.icon} ${cup.name}</a> ${cup.date}${cup.chan ? ` <a href="${cup.chan}"><img src="https://implyingrigged.info/cytube/emotes/ChannelButton.png" height="${height}"/></a>` : ""}</span>`;
 	});
 	cupHtmls[0] = `<b>${cupHtmls[0]}</b>`;
 	$("#streamtitle").remove();
@@ -559,6 +628,6 @@ function ChallongeTab(challongeLink, tabTitle) {
 	if (challongeLink) {
 		let challongeTab = $('<div role="tabpanel" class="tab-pane" id="challongeTab"></div>').appendTo('#MainTabContainer>div');
 		challongeTab.append(`<iframe src="${challongeLink}/module?show_tournament_name=1" width="100%" height="1000" frameborder="0" scrolling="auto" allowtransparency="true"></iframe>`);
-		$('#MainTabContainer>ul').append('<li role="presentation"><a role="tab" data-toggle="tab" aria-expanded="false" href="#challongeTab" id="challongeTabButton" style="padding: 5px 10px;">GARBAGE DAY <img src="https://implyingrigged.info/cytube/emotes/garbageday.png" height="30"></a></li>');
+		$('#MainTabContainer>ul').append(`<li role="presentation"><a role="tab" data-toggle="tab" aria-expanded="false" href="#challongeTab" id="challongeTabButton" style="padding: 5px 10px;">${tabTitle}</a></li>`);
 	}
 }
