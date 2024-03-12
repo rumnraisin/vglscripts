@@ -1,210 +1,235 @@
 var TeamLists = {};
 var AllTeams = {};
-var CurrentTeamList = null; 
+var CurrentTeamList = null;
 var CurrentTeamListName;
 var defaultIconSrc = "https://implyingrigged.info/w/images/d/df/Vglg_icon.png";
 var scrollingToTeam = false;
+var canv = null;
 
-function setTeamList(teamList){
+function setTeamList(teamList) {
 	var teamListName = "";
-	if(typeof(teamList) === 'string'){
+	if (typeof (teamList) === 'string') {
 		teamListName = teamList;
 		teamList = TeamLists[teamList];
 	}
-	
-	if(teamListName != "" && teamListName === CurrentTeamListName)
+
+	if (teamListName != "" && teamListName === CurrentTeamListName)
 		return;
-	
-	if(typeof(UserCustomTeamList) !== 'undefined')
+
+	if (typeof (UserCustomTeamList) !== 'undefined')
 		teamList = teamList.concat(UserCustomTeamList);
-	
-	var tmpTeamsCssLines = [ '<style type="text/css" id="iconcss_tmp">' ];
+
+	TEAMCOLOR = getOrDefault(CHANNEL.name + "_TEAMCOLOR_" + teamListName, '');
+
+	var tmpTeamsCssLines = ['<style type="text/css" id="iconcss_tmp">'];
 	$("#messagebuffer").removeClass("teamlist_" + CurrentTeamListName);
 	$("#messagebuffer").addClass("teamlist_" + teamListName);
-	
+
 	var newSelector = $("#selectteam ul");
 	newSelector.html('<li tabindex="0" data-val=""><img src="' + defaultIconSrc + '"></li>');
-	
+
 	var selectedColorInList = false;
-	var addOption = function(teamObj){
-		if(!teamObj.ExclusiveTo || teamObj.ExclusiveTo == CLIENT.name){
+	var addOption = function (teamObj) {
+		if (!teamObj.ExclusiveTo || teamObj.ExclusiveTo == CLIENT.name) {
 			newSelector.append('<li tabindex="0" data-val="' + teamObj.id + '"><img src="' + teamObj.icon + '"><p>' + teamObj.name + '</p></li>');
-			
+
 			selectedColorInList = selectedColorInList || teamObj.id === TEAMCOLOR;
 		}
 	};
-	teamList.forEach(function(team){
-		if(typeof(team) === 'string' && AllTeams.hasOwnProperty(team)){
+	teamList.forEach(function (team) {
+		if (typeof (team) === 'string' && AllTeams.hasOwnProperty(team)) {
 			addOption(AllTeams[team]);
 		}
-		else if(typeof(team) === 'object'){
-			if(!AllTeams.hasOwnProperty(team.id) || teamListName == ""){
+		else if (typeof (team) === 'object') {
+			if (!AllTeams.hasOwnProperty(team.id) || teamListName == "") {
 				InitTeam(team);
 				tmpTeamsCssLines.push(team.css);
 			}
 			addOption(team);
 		}
-		 
+
 	});
-	
-	if (tmpTeamsCssLines.length > 1){
+
+	if (tmpTeamsCssLines.length > 1) {
 		tmpTeamsCssLines.push('</style>');
 		$('#iconcss_tmp').remove();
 		$(document.head).append(tmpTeamsCssLines.join('\n'));
 	}
-	
-	if(selectedColorInList){
-		$("#selectteam li[data-val='"+TEAMCOLOR+"']").click();
-	}
-	else{
-		$("#selectteam li:first").click();
-	}
-	
+
+	setTimeout(function () {
+		if (selectedColorInList) {
+			$("#selectteam li[data-val='" + TEAMCOLOR + "']").click();
+		}
+		else {
+			$("#selectteam li:first").click();
+		}
+	}, 1000);
+
 	CurrentTeamList = teamList;
 	CurrentTeamListName = teamListName;
 };
 
-function InitTeamLists(){
+function InitTeamLists() {
 	var cssLines = [
 		'<style type="text/css" id="iconcss">'
 	];
-	Object.keys(TeamLists).forEach(function(key){
+	Object.keys(TeamLists).forEach(function (key) {
 		var list = TeamLists[key];
 		cssLines.push("\n/* " + key + " */");
-		list.forEach(function(team){
-			if(typeof(team) === 'object'){
+		list.forEach(function (team) {
+			if (typeof (team) === 'object') {
 				InitTeam(team);
 				cssLines.push(team.css);
 			}
 		});
 	});
 	cssLines.push('</style>');
-	
+
 	var css = cssLines.join('\n');
-	
+
 	$("#iconcss").remove();
 	$(document.head).append(css);
-	
+
 	$("#selectteam").remove();
 	$("#chatline2").remove();
 	$('<textarea class="form-control" id="chatline2" rows="1"></textarea>').insertAfter('#chatline');
 	var dropup = $('<span class="dropup"></span>');
 	var selectteam = $('<div id="selectteam"></div>').insertBefore('#chatwrap>form').append(dropup);
 	dropup.append('<img class="dropdown-toggle" data-toggle="dropdown" title="Team Icon">');
-	dropup.on('shown.bs.dropdown', function(){
-		var elm = $('#selectteam li[data-val="'+TEAMCOLOR+'"]');
-		if(elm && elm[0]){
+	dropup.on('shown.bs.dropdown', function () {
+		var elm = $('#selectteam li[data-val="' + TEAMCOLOR + '"]');
+		if (elm && elm[0]) {
 			elm[0].parentNode.scrollTop = elm[0].offsetTop;
-			elm[0].focus({preventScroll:true});
+			elm[0].focus({ preventScroll: true });
 		}
 	});
 	var iconsPerRow = 11;
 	$('<ul class="dropdown-menu"></ul>').appendTo(dropup)
-		.on("click", "li", function(){
+		.on("click", "li", function () {
 			TEAMCOLOR = this.dataset.val;
-			setOpt(CHANNEL.name + "_TEAMCOLOR", TEAMCOLOR);
-			if(TEAMCOLOR)
+			setOpt(CHANNEL.name + "_TEAMCOLOR_" + CurrentTeamListName, TEAMCOLOR);
+			if (TEAMCOLOR)
 				$("#selectteam>span>img").attr("src", AllTeams[TEAMCOLOR].icon);
 			else
 				$("#selectteam>span>img").attr("src", defaultIconSrc);
-		}).on("mouseover", "li", function(){
-			if(!scrollingToTeam)
-				this.focus({preventScroll:true});
+		}).on("mouseover", "li", function () {
+			if (!scrollingToTeam)
+				this.focus({ preventScroll: true });
 			scrollingToTeam = false;
-		}).on("keydown", function(event){
+		}).on("keydown", function (event) {
 			var selected = $(document.activeElement);
 			var elm = null;
-			switch (event.key){
+			switch (event.key) {
 				case 'ArrowUp': case 'Up':
-					if(selectteam.hasClass('grid')) {
+					if (selectteam.hasClass('grid')) {
 						var length = selected.siblings().length;
 						var iconsInLastRow = length % iconsPerRow;
 						var indexAbove = selected.index() - iconsPerRow;
-						if(iconsInLastRow != 0 && selected.index() >= (Math.floor(length / iconsPerRow) * iconsPerRow))
+						if (iconsInLastRow != 0 && selected.index() >= (Math.floor(length / iconsPerRow) * iconsPerRow))
 							indexAbove += Math.floor((iconsPerRow - iconsInLastRow) / 2);
-						if(indexAbove >= 0)
+						if (indexAbove >= 0)
 							elm = $(selected.parent().children()[indexAbove]);
 					} else
 						elm = selected.prev();
 					break;
 				case 'ArrowDown': case 'Down':
-					if(selectteam.hasClass('grid')) {
+					if (selectteam.hasClass('grid')) {
 						var length = selected.siblings().length;
 						var iconsInLastRow = length % iconsPerRow;
 						var indexBelow = selected.index() + iconsPerRow;
-						if(iconsInLastRow != 0 && indexBelow >= (Math.floor(length / iconsPerRow) * iconsPerRow)) {
+						if (iconsInLastRow != 0 && indexBelow >= (Math.floor(length / iconsPerRow) * iconsPerRow)) {
 							var lastRowAdjustment = Math.floor((iconsPerRow - iconsInLastRow) / 2);
 							var indexInLastRow = indexBelow % iconsPerRow;
-							if(indexInLastRow >= lastRowAdjustment)
+							if (indexInLastRow >= lastRowAdjustment)
 								elm = $(selected.parent().children()[indexBelow - lastRowAdjustment]);
-						} else if(indexBelow < selected.siblings().length)
+						} else if (indexBelow < selected.siblings().length)
 							elm = $(selected.parent().children()[indexBelow]);
 					} else
 						elm = selected.next();
 					break;
 				case 'ArrowLeft': case 'Left':
-					if(selectteam.hasClass('grid') && selected.index() % iconsPerRow != 0)
+					if (selectteam.hasClass('grid') && selected.index() % iconsPerRow != 0)
 						elm = selected.prev();
 					break;
 				case 'ArrowRight': case 'Right':
-					if(selectteam.hasClass('grid') && (selected.index()+1) % iconsPerRow != 0)
+					if (selectteam.hasClass('grid') && (selected.index() + 1) % iconsPerRow != 0)
 						elm = selected.next();
 					break;
 				case 'Tab':
 					elm = event.shiftKey ? selected.prev() : selected.next();
 					break;
 				case 'Backspace': case 'Delete':
-				    elm = $('#selectteam li:first-child');
+					elm = $('#selectteam li:first-child');
 					break;
 				case 'Enter':
 					event.stopPropagation();
-					if(selected.parentsUntil('#selectteam').length)
+					if (selected.parentsUntil('#selectteam').length)
 						selected.click();
 					break;
 				case 'Escape':
 					event.stopPropagation();
 					selectteam.children('.dropdown-toggle').click();
 					break;
-				default: 
-					if(event.key.length == 1){
-						var itemSel = 'li[data-val^="'+event.key.toLowerCase()+'"]';
-						elm = $('#selectteam li:focus~'+itemSel).first();
-						if(!elm.length) elm = $('#selectteam '+itemSel).first();
+				default:
+					if (event.key.length == 1) {
+						var itemSel = 'li[data-val^="' + event.key.toLowerCase() + '"]';
+						elm = $('#selectteam li:focus~' + itemSel).first();
+						if (!elm.length) elm = $('#selectteam ' + itemSel).first();
 					}
 					break;
 			}
-			if(elm && elm[0]){
+			if (elm && elm[0]) {
 				event.stopPropagation();
 				event.preventDefault();
 				var liRect = elm[0].getBoundingClientRect();
 				var ulRect = elm.parent()[0].getBoundingClientRect();
-				if(liRect.top < ulRect.top || liRect.bottom > ulRect.bottom){
+				if (liRect.top < ulRect.top || liRect.bottom > ulRect.bottom) {
 					scrollingToTeam = true;
 					elm[0].parentNode.scrollTop = elm[0].offsetTop;
 				}
-				elm[0].focus({preventScroll:true});
+				elm[0].focus({ preventScroll: true });
 			}
 		});
-	
+
 }
 
 function InitTeam(team) {
-	if(team.icon.startsWith("/")){
+	if (team.icon.startsWith("/")) {
 		team.icon = "https://implyingrigged.info" + team.icon;
 	}
-	if(!team.hasOwnProperty('name')){
+	if (!team.hasOwnProperty('name')) {
 		team.name = '/' + team.id + '/';
 	}
-	
-	var cssSel = (team.ExclusiveTo ? ".chat-msg-" + team.ExclusiveTo + " ": "") + ".team" + team.id;
-	team.css = cssSel+"{ color:"+team.color+"!important;} "+cssSel+"::before{ background-image:url('"+team.icon+"')!important;}";
-	
-	if(!AllTeams.hasOwnProperty(team.id))
+	if (!team.color) {
+		GetColorFromImage(team);
+	}
+
+	var cssSel = (team.ExclusiveTo ? ".chat-msg-" + team.ExclusiveTo : "") + ".team" + team.id + " .username";
+	team.css = cssSel + "{ color:" + team.color + "!important;" + (team.extraCss || "") + "} " + cssSel + "::before{ background-image:url('" + team.icon + "')!important;}";
+
+	if (!AllTeams.hasOwnProperty(team.id))
 		AllTeams[team.id] = team;
 }
 
+function GetColorFromImage(teamObj) {
+	var img = new Image();
+	img.src = teamObj.icon;
+	img.onload = function () {
+		canv = canv || document.createElement("canvas").getContext("2d");
+		canv.reset();
+		canv.drawImage(img, 0, 0, 32, 32);
+		teamObj.color = Object.entries(
+			Array.from(canv.getImageData(0, 0, 32, 32).data)
+				.map((d, i, a) => (i % 4 || a[i + 3] < 255) ? 0 : d * 65536 + a[i + 1] * 256 + a[i + 2])
+				.filter(s => s)
+				.map(s => s.toString(16))
+				.reduce((o, v) => (o[v] = (o[v] | 0) + 1) && o, {}))
+			.reduce((a, b) => a[1] > b[1] ? a : b)[0];
+	}
+}
+
 var TeamLists = {
-	"4cc":[
+	"vgl":[
 		{id:"idolmaster",   color:"#41DCFF",icon:"/w/images/7/7a/%40_icon.png"},
 		{id:"2hug",			color:"#7FAC75",icon:"/w/images/3/34/2hug_icon.png"},
 		{id:"aceg",			color:"#CE5200",icon:"/w/images/e/e5/Aceg_icon.png"},
@@ -256,7 +281,7 @@ var TeamLists = {
 		{id:"wtg",		color:"#de0000",icon:"/w/images/4/4f/Wtg_icon.png"},
 		{id:"xgg",			color:"#c21133",icon:"/w/images/2/2c/Xgg_icon.png"},
 	],
-	"meme":[
+	"rttc":[
 		{id:"animeswords",	color:"#E31B22",icon:"/w/images/thumb/b/b4/Animeswords_icon.png/25px-Animeswords_icon.png"},
 		{id:"aniplex",	color:"#3838A6",icon:"/w/images/thumb/0/0f/Aniplex_icon.png/25px-Aniplex_icon.png"},
 		{id:"ccpg",	color:"#DE2910",icon:"/w/images/thumb/f/fd/Ccpg_icon.png/25px-Ccpg_icon.png"},
@@ -285,38 +310,40 @@ var TeamLists = {
 		{id:"srt",	color:"#5B72A4",icon:"/w/images/f/f4/Srt_icon.png"},
 		{id:"trinity",	color:"#8bc2d2",icon:"/w/images/0/01/Trinity_icon.png"},
 	]
-
-
 	/* when somebody makes an invitational and the teams are all in a neat multi-column list on the page,
 	   inspect element > right-click > store as global variable > then in the console (edit as needed):
-		[].slice.call(temp1.querySelectorAll('li')).map(function(li){ return { id:li.querySelector('b a').innerHTML.replace('/', '').replace('/', ''), color:'#999999', icon:li.querySelector('img').getAttribute('src') }; })
+		'['+[].slice.call(temp1.querySelectorAll('li')).map(li=>`\n    {id:"${li.querySelector('b a').innerHTML.replace('/', '').replace('/', '",').padEnd(12)} color:"#905595", icon:"${li.querySelector('img')?.getAttribute('src')}"}`).join(',')+'\n]'
+		OR for a signups section:
+		'['+[].slice.call(temp1.querySelectorAll('.badgeicon-med-withborder>a')).map(a=>`\n    {id:"${a.getAttribute('title').replace('/', '').replace('/', '",').padEnd(12)} color:"#905595", icon:"${a.querySelector('img')?.getAttribute('src')}"}`).join(',')+'\n]'
 	*/
 };
 
 InitTeamLists();
 
-if(getOrDefault(CHANNEL.name + "_SELECTTEAM_GRID", false))
+if (getOrDefault(CHANNEL.name + "_SELECTTEAM_GRID", false))
 	$('#toggleTeamSelStyle').click();
-var TEAMCOLOR = getOrDefault(CHANNEL.name + "_TEAMCOLOR", '');
-setTeamList("bag");
-if (TEAMCOLOR){
+var TEAMCOLOR = '';
+if (InlineScript4CC) InlineScript4CC();
+else setTeamList("vgl");
+
+if (TEAMCOLOR) {
 	$("#selectteam>span>img").attr("src", AllTeams[TEAMCOLOR].icon);
 }
-else{
+else {
 	$("#selectteam>span>img").attr("src", defaultIconSrc);
 }
 
 
 //Format messages upon page load because they're handled differently and I can't find the function
-$('.teamColorSpan').each(function(){
-	var color = $(this).text().replace(new RegExp('-','g'),'');
-	$(this).parent().parent().find('.username').addClass(color);
+$('.teamColorSpan').each(function () {
+	var color = $(this).text().replace(new RegExp('-', 'g'), '');
+	$(this).parent().parent().addClass(color);
 });
-$('#messagebuffer div span').each(function(){
+$('#messagebuffer div span').each(function () {
 	var teamClass = $(this).html().match(/(\|@.+@\|)/gi);
-	if (teamClass){
-		$(this).html($(this).html().replace(teamClass[0],''));
-		teamClass = 'team' + teamClass[0].replace('|@','').replace('@|','');
+	if (teamClass) {
+		$(this).html($(this).html().replace(teamClass[0], ''));
+		teamClass = 'team' + teamClass[0].replace('|@', '').replace('@|', '');
 		console.log(teamClass);
 		$(this).parent().find('.username').addClass(teamClass);
 	} else {
