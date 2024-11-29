@@ -274,7 +274,7 @@ var TeamLists = {
 		{id:"twg",			color:"#990000",icon:"/w/images/b/b2/Twg_icon.png"},
 		{id:"uma",			color:"#796BAA",icon:"/w/images/2/22/Uma_icon.png"},
 		{id:"utg",			color:"#67A4E0",icon:"/w/images/d/d1/Utg_icon.png"},
-		{id:"vgt",			color:"#BFBFBF",icon:"/w/images/0/0a/Vgt_icon.png},
+		{id:"vgt",			color:"#BFBFBF",icon:"/w/images/0/0a/Vgt_icon.png"},
 		{id:"vn",			color:"#FFFFFF",icon:"/w/images/f/fb/Vn_icon.png"},
 		{id:"vrg",			color:"#34c7cf",icon:"/w/images/d/d6/Vrg_icon.png"},
 		{id:"wtg",		color:"#de0000",icon:"/w/images/4/4f/Wtg_icon.png"},
