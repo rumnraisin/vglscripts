@@ -251,7 +251,7 @@ var TeamLists = {
 		{id:"gig",			color:"#f6dec7",icon:"/w/images/a/ab/Gig_icon.png"},
 		{id:"hanny",		color:"#E11212",icon:"/w/images/8/80/Hanny_icon.png"},
 		{id:"hbr",			color:"#D94545",icon:"/w/images/1/1a/Hbr_icon.png"},
-		{id:"hbr",			color:"#FFE800",icon:"/w/images/8/88/Hdg_icon.png"},
+		{id:"hdg",			color:"#FFE800",icon:"/w/images/8/88/Hdg_icon.png"},
 		{id:"hgg2d",    	color:"#5DADEC",icon:"/w/images/7/7a/Hgg2d_icon.png"},
 		{id:"hsrg",			color:"#6a060e",icon:"/w/images/f/f5/Hsrg_icon.png"},
 		{id:"ink",			color:"#FE902F",icon:"/w/images/f/f0/Ink_icon.png"},
