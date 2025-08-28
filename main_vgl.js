@@ -6,8 +6,8 @@
 //Replaced default 4cc calendar with vgl calendar
 //Changed the default cup title to /vg/ League
 
-$('<link id="chanfavicon" href="https://implyingrigged.info/w/images/d/df/Vglg_icon.png" type="image/x-icon" rel="shortcut icon" />').appendTo("head");
-$('.navbar-brand').attr('href','https://implyingrigged.info/wiki//vg/_League').text(' /vg/ League').css('padding', '0 10px 0 0').prepend('<img src="https://implyingrigged.info/w/images/d/df/Vglg_icon.png" style="display: inline;" height="20"/>');$('head').append('<script type="text/javascript" src="https://rumnraisin.github.io/vglscripts/nnd.js">');
+$('<link id="chanfavicon" href="https://spasm.tv/w/images/d/df/Vglg_icon.png" type="image/x-icon" rel="shortcut icon" />').appendTo("head");
+$('.navbar-brand').attr('href','https://implyingrigged.info/wiki//vg/_League').text(' /vg/ League').css('padding', '0 10px 0 0').prepend('<img src="https://spasm.tv/w/images/d/df/Vglg_icon.png" style="display: inline;" height="20"/>');$('head').append('<script type="text/javascript" src="https://rumnraisin.github.io/vglscripts/nnd.js">');
 $('head').append(`<script type="text/javascript" id="teamcolorJS" src="https://rumnraisin.github.io/vglscripts/teamcolor_vgl.js?${Date.now()}">`);
 TimeSetting = getOrDefault(CHANNEL.name + "_SCHEDULE_TIME", "UTC");
 
