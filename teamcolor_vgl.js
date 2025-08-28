@@ -195,7 +195,7 @@ function InitTeamLists() {
 
 function InitTeam(team) {
 	if (team.icon.startsWith("/")) {
-		team.icon = "https://implyingrigged.info" + team.icon;
+		team.icon = "https://spasm.tv" + team.icon;
 	}
 	if (!team.hasOwnProperty('name')) {
 		team.name = '/' + team.id + '/';
