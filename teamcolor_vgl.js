@@ -2,7 +2,7 @@ var TeamLists = {};
 var AllTeams = {};
 var CurrentTeamList = null;
 var CurrentTeamListName;
-var defaultIconSrc = "https://implyingrigged.info/w/images/d/df/Vglg_icon.png";
+var defaultIconSrc = "https://spasm.tv/w/images/d/df/Vglg_icon.png";
 var scrollingToTeam = false;
 var canv = null;
 
