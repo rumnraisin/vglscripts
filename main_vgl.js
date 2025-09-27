@@ -10,6 +10,7 @@ $('<link id="chanfavicon" href="https://spasm.tv/w/images/d/df/Vglg_icon.png" ty
 $('.navbar-brand').attr('href','https://implyingrigged.info/wiki//vg/_League').text(' /vg/ League').css('padding', '0 10px 0 0').prepend('<img src="https://spasm.tv/w/images/d/df/Vglg_icon.png" style="display: inline;" height="20"/>');$('head').append('<script type="text/javascript" src="https://rumnraisin.github.io/vglscripts/nnd.js">');
 $('head').append(`<script type="text/javascript" id="teamcolorJS" src="https://rumnraisin.github.io/vglscripts/teamcolor_vgl.js?${Date.now()}">`);
 TimeSetting = getOrDefault(CHANNEL.name + "_SCHEDULE_TIME", "UTC");
+var vgleaguereply = "based";
 
 //Overwrite the custom media load function to skip the warning message if the URL is angelthump
 var playerType = window.CustomEmbedPlayer;
@@ -97,6 +98,7 @@ $( document ).ready(function() {
 		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.youtube.com/channel/UCMZYZp8eULxC5v097fswHcA?sub_confirmation=1" target="_blank" style="cursor:pointer;" title="Get notifications when the Cup is liv">🔔</a></li>');
 		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.youtube.com/channel/UCMZYZp8eULxC5v097fswHcA" target="_blank" style="cursor:pointer;" title="Open the YouTube channel"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico"/></a></li>');
 		$('#nav-collapsible ul:first-child').append('<li><a href="https://www.twitch.tv/vglvods" target="_blank" style="cursor:pointer;" title="Watch on Twitch (much better video quality)"><img src="https://static.twitchcdn.net/assets/favicon-32-e29e246c157142c94346.png" width=16 /></a></li>');
+		$('#nav-collapsible ul:first-child').append('<li><a id="btn_autoreply" class="pointer">Turn on Autoreply</a></li>');
 	}
 	
 	/* Tabs */ {
@@ -125,6 +127,7 @@ $( document ).ready(function() {
 				$('#rightcontrols').detach().appendTo('#playlistTab');
 				$('#playlistrow').detach().appendTo('#playlistTab');
 			});
+			
 		}
 		
 		//Polls Tab
@@ -182,10 +185,22 @@ $( document ).ready(function() {
 	$('#videowrap').append("<span id='vidchatcontrols' style='float:right'>");
 	$('#emotelistbtn').detach().insertBefore('#chatwrap>form').wrap('<div id="emotebtndiv"></div>').text(':^)').attr('title', 'Emote List');
 	$('#leftcontrols').remove();
-		
 	
+	
+	$('#btn_autoreply').click(function(){
+		if ($(this).text() == 'Turn on Autoreply'){
+			$(this).text('Turn off Autoreply');
+		} else {
+			$(this).text('Turn on Autoreply');
+		}
+	});
 	
 	var previousMessage = "";
+	var autoReplyCooldown = false;
+	
+	window.setInterval(function(){
+		autoReplyCooldown	= false;
+	}, 30000);
 	
 	//Overwriting the chat functions
 	$('#chatline').off();
@@ -250,6 +265,18 @@ $( document ).ready(function() {
 		}
 	});
 	formatChatMessage = function(data, last) {
+				if ((data.msg.toLowerCase().indexOf('vg league <span') > -1 || data.msg.toLowerCase() == 'vg league') && $('#btn_autoreply').text() == 'Turn off Autoreply' && autoReplyCooldown == false){
+			t = vgleaguereply + " ";
+			autoReplyCooldown = true;
+							if (TEAMCOLOR && t.match(/^\/(h?poll|(s|un)?mute|kick|(ip)?ban|clean)\b/gi) === null){
+					t = t + ' -team' + TEAMCOLOR + '-';
+			}
+		socket.emit("chatMsg", {
+				msg: t,
+				meta: {}
+			});
+		}
+
 		//editing this to look like the original cytube again -t. scoops
 		
 		// Backwards compat    
