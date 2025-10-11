@@ -231,6 +231,7 @@ function GetColorFromImage(teamObj) {
 var TeamLists = {
 	"vgl":[
 		{id:"idolmaster",   color:"#62B7DD",icon:"/w/images/7/7a/%40_icon.png"},
+		{id:"1999",         color:"#CB4F33",icon:"/w/images/6/60/1999_icon.png"},
 		{id:"2hug",			color:"#7FAC75",icon:"/w/images/3/34/2hug_icon.png"},
 		{id:"aceg",			color:"#CE5200",icon:"/w/images/e/e5/Aceg_icon.png"},
 		{id:"akg",			color:"#171727",icon:"/w/images/0/07/Akg_icon.png"},
@@ -245,6 +246,7 @@ var TeamLists = {
 		{id:"esg",                      color:"#F4F7F7",icon:"/w/images/f/ff/Esg_icon.png"},
 		{id:"fgoalter",		color:"#0b3d8e",icon:"/w/images/d/da/Fgoalter_icon.png"},
 		{id:"fgog",			color:"#900A1B",icon:"/w/images/7/75/Fgog_icon.png"},
+		{id:"fng",          color:"#1B90DD",icon:"/w/images/5/59/Fng_icon.png"},
 		{id:"gbfg",			color:"#4561BA",icon:"/w/images/4/4f/Gbfg_icon.png"},
 		{id:"gbpen",		color:"#E50050",icon:"/w/images/5/55/Gbpen_icon.png"},
 		{id:"gfg",			color:"#ffaa00",icon:"/w/images/1/12/Gfg_icon.png"},
