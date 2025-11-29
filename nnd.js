@@ -39,12 +39,13 @@ function nicoChineseRipOff(data) {
 			NICOCOUNTER = 1;
 		}
 		data.meta.addClass === "shout" ? data.msg = '<span class="shout">' + data.msg : "";
-		var vidchat = $('<marquee class="vidchat" scrollamount="15" loop="1" style="margin-top:' + offset + 'px">' + data.msg + '</div>');
+		var randomSpeed = Math.floor(Math.random() * 15) + 15; // Random between 15-30 (1x-2x factor)
+		var vidchat = $('<marquee class="vidchat" scrollamount="' + randomSpeed + '" loop="1" style="margin-top:' + offset + 'px; font-size: 250%">' + data.msg + '</div>');
 		vidchat.appendTo(".embed-responsive");
 		setTimeout(function() {
 			vidchat.remove();
 			$(".embed-responsive marquee").length === 0 ? NICOCOUNTER = 0 : "";
-		}, 10000);
+		}, 14000);
 	}
 }
 
