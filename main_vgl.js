@@ -515,7 +515,7 @@ ScheduleLoaded = false;
 function SetMatchSchedule(pageName) {
 	if (ScheduleLoaded) 
 		return;
-	let apiEndpoint = 'https://implyingrigged.info/w/api.php?action=parse&prop=text&formatversion=2&format=json&origin=*&page=';
+	let apiEndpoint = 'https://spasm.tv/w/api.php?action=parse&prop=text&formatversion=2&format=json&origin=*&page=';
 	//Load the cup page HTML from the wiki
 	$.getJSON(apiEndpoint + pageName, function(data) {
 		//Load the HTML into a virtual document to avoid loading images
