@@ -262,6 +262,7 @@ var TeamLists = {
 		{id:"lcg",		color:"#7F0000",icon:"/w/images/5/5b/Lcg_icon.png"},
 		{id:"llsifg",		color:"#E7147E",icon:"/w/images/1/14/Llsifg_icon.png"},
 		{id:"mggg",			color:"#EE5689",icon:"/w/images/0/06/Mggg_icon.png"},
+		{id:"mjg",			color:"#2956B9",icon:"/w/images/e/e7/Mjg_icon.png"},
 		{id:"nepgen",		color:"#4E3483",icon:"/w/images/4/43/Nepgen_icon.png"},
 		{id:"nikg",		color:"#f7f6ee",icon:"/w/images/8/8b/Nikg_icon.png"},
 		{id:"omg",			color:"#62FFFC",icon:"/w/images/8/89/Omg_icon.png"},
