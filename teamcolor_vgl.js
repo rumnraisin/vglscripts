@@ -230,6 +230,7 @@ function GetColorFromImage(teamObj) {
 
 var TeamLists = {
 	"vgl":[
+		{id:"4ccg",         color:"#309252",icon:"/w/images/9/97/4ccg_icon.png"},
 		{id:"idolmaster",   color:"#62B7DD",icon:"/w/images/7/7a/%40_icon.png"},
 		{id:"1999",         color:"#CB4F33",icon:"/w/images/6/60/1999_icon.png",},
 		{id:"2hug",			color:"#7FAC75",icon:"/w/images/3/34/2hug_icon.png"},
