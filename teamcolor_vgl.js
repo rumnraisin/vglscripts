@@ -275,6 +275,7 @@ var TeamLists = {
 		{id:"smbg",			color:"#B30000",icon:"/w/images/3/3f/Smbg_icon.png"},
 		{id:"smtg",     	color:"#FFFF00",icon:"/w/images/8/81/Smtg_icon.png"},
 		{id:"snowg",     	color:"#bfcfe4",icon:"/w/images/6/64/Snowg_icon.png"},
+		{id:"sora",         color:"#A4A5D5",icon:"/w/images/3/30/Sora_icon.png"},
 		{id:"tf2g",			color:"#BD3B3B",icon:"/w/images/2/24/Tf2g_icon.png"},
 		{id:"trg",			color:"#228B22",icon:"/w/images/7/7e/Trg_icon.png"},
 		{id:"uma",			color:"#796BAA",icon:"/w/images/2/22/Uma_icon.png"},
