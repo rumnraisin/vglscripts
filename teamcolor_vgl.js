@@ -230,9 +230,6 @@ function GetColorFromImage(teamObj) {
 
 var TeamLists = {
 	"vgl":[
-		{id:"bullettrain",  color:"#cc0000",icon:"/w/images/a/ad/Bullettrain_iconr.png"},
-		{id:"commiebros",   color:"#009900",icon:"/w/images/1/10/SuperCommieBros.png"},
-		{id:"blu",          color:"#0066cc",icon:"/w/images/0/0b/BLUicon.png"},
 		{id:"4ccg",         color:"#309252",icon:"/w/images/9/97/4ccg_icon.png"},
 		{id:"idolmaster",   color:"#62B7DD",icon:"/w/images/7/7a/%40_icon.png"},
 		{id:"1999",         color:"#CB4F33",icon:"/w/images/6/60/1999_icon.png",},
@@ -285,6 +282,7 @@ var TeamLists = {
 		{id:"vrg",			color:"#34c7cf",icon:"/w/images/d/d6/Vrg_icon.png"},
 		{id:"wowg",			color:"#FFF468",icon:"/w/images/9/9d/Wowg_icon.png"},
 		{id:"wtg",		color:"#de0000",icon:"/w/images/4/4f/Wtg_icon.png"},
+		{id:"wuwa",		color:"#FFFFFF",icon:"/w/images/5/53/Wuwa_icon.png"},
 		{id:"xivg",			color:"#D6E0E2",icon:"/w/images/c/ce/Xivg_icon.png"},
 		{id:"zzz",			color:"#FD802F",icon:"/w/images/2/2c/Zzz_icon.png"},
 	],
